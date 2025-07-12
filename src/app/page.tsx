@@ -388,7 +388,7 @@ export default function ModernPortfolio() {
               animate="visible"
               exit="exit"
               variants={mobileMenuVariants}
-              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center py-6"
+              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center pt-20 pb-6 overflow-y-auto"
             >
               <button
                 className="absolute top-4 right-4 text-white"
