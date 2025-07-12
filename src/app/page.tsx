@@ -13,7 +13,6 @@ import {
   ExternalLink,
   Download,
   Sparkles,
-  Target,
   Rocket,
   Brain,
   Code2,
@@ -22,8 +21,6 @@ import {
   Menu,
   X,
   MousePointer,
-  Lightbulb,
-  Handshake,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -101,7 +98,7 @@ export default function ModernPortfolio() {
       image: "/placeholder.svg?height=400&width=600",
       link: "#",
       type: "Frontend Development",
-      gradient: "from-pink-500 to-rose-500",
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       title: "VetCare System",
@@ -123,7 +120,7 @@ export default function ModernPortfolio() {
       image: "/placeholder.svg?height=400&width=600",
       link: "#",
       type: "Frontend Development",
-      gradient: "from-blue-500 to-indigo-500",
+      gradient: "from-indigo-500 to-blue-500",
     },
     {
       title: "SmartCents",
@@ -134,7 +131,7 @@ export default function ModernPortfolio() {
       image: "/placeholder.svg?height=400&width=600",
       link: "#",
       type: "Mobile Development",
-      gradient: "from-purple-500 to-violet-500",
+      gradient: "from-sky-500 to-blue-500",
     },
   ]
 
@@ -159,38 +156,40 @@ export default function ModernPortfolio() {
       issuer: "Oracle",
       code: "1Z0-915-1",
       icon: "🏆",
-      color: "from-orange-500 to-red-500",
+      color: "from-blue-500 to-sky-500",
     },
     {
       title: "MySQL Implementation Associate",
       issuer: "Oracle",
       code: "1Z0-922",
       icon: "🥇",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-cyan-500 to-blue-500",
     },
     {
       title: "AWS Cloud 101",
       issuer: "AWS Educate",
       code: "Cloud Fundamentals",
       icon: "☁️",
-      color: "from-yellow-500 to-orange-500",
+      color: "from-indigo-500 to-blue-500",
     },
     {
       title: "AWS Storage Fundamentals",
       issuer: "AWS Educate",
       code: "Storage Solutions",
       icon: "💾",
-      color: "from-green-500 to-emerald-500",
+      color: "from-sky-500 to-cyan-500",
     },
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden">
+      {" "}
+      {/* Removed bg-black */}
       {/* Animated Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-black to-blue-900/20"></div>
         <div
-          className="absolute w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+          className="absolute w-96 h-96 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl"
           style={{
             left: mousePosition.x - 192,
             top: mousePosition.y - 192,
@@ -211,12 +210,11 @@ export default function ModernPortfolio() {
           ></div>
         ))}
       </div>
-
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-xl z-[100] border-b border-white/10 py-4">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               WG.dev
             </div>
 
@@ -228,7 +226,7 @@ export default function ModernPortfolio() {
                   className="capitalize text-gray-300 hover:text-white transition-all duration-300 hover:scale-105 relative group"
                 >
                   {section}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
                 </button>
               ))}
             </div>
@@ -254,7 +252,6 @@ export default function ModernPortfolio() {
           )}
         </div>
       </nav>
-
       {/* Hero Section */}
       <section
         id="home"
@@ -265,7 +262,7 @@ export default function ModernPortfolio() {
           {/* Animated Profile Image */}
           <div className="relative mb-8 inline-block">
             <div className="relative z-30">
-              <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-1 animate-spin-slow">
+              <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 p-1 animate-spin-slow">
                 <Image
                   src="/placeholder.svg?height=160&width=160"
                   alt="Wimukthi Gunarathna"
@@ -283,21 +280,21 @@ export default function ModernPortfolio() {
           {/* Animated Text */}
           <div className="space-y-6">
             <h1 className="text-6xl md:text-8xl font-black leading-tight">
-              <span className="block bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent animate-pulse">
+              <span className="block bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent animate-pulse">
                 Wimukthi
               </span>
-              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Gunarathna
               </span>
             </h1>
 
             <div className="text-xl md:text-2xl text-gray-300 space-y-2">
               <div className="flex items-center justify-center space-x-2">
-                <Brain className="w-6 h-6 text-purple-400" />
+                <Brain className="w-6 h-6 text-blue-400" />
                 <span>Data Science Undergraduate</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <Code2 className="w-6 h-6 text-pink-400" />
+                <Code2 className="w-6 h-6 text-cyan-400" />
                 <span>Full Stack Developer</span>
               </div>
             </div>
@@ -310,7 +307,7 @@ export default function ModernPortfolio() {
             <div className="flex flex-wrap justify-center gap-6 pt-8">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[180px] h-14"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[180px] h-14"
               >
                 <Rocket className="w-5 h-5 mr-2" />
                 Let's Collaborate
@@ -318,7 +315,7 @@ export default function ModernPortfolio() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[160px] h-14"
+                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[160px] h-14"
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download CV
@@ -348,20 +345,17 @@ export default function ModernPortfolio() {
           <MousePointer className="w-6 h-6 text-gray-400" />
         </div>
       </section>
-
       {/* About Section - Revamped */}
       <section id="about" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                About Me
-              </span>
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">About Me</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Bridging data insights with robust development to build impactful solutions.
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mt-4"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4"></div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -383,17 +377,17 @@ export default function ModernPortfolio() {
             </Card>
 
             {/* Education Card */}
-            <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+            <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
               <CardContent className="p-0">
                 <div className="flex items-center mb-4">
-                  <GraduationCap className="w-10 h-10 text-purple-400 mr-3" />
+                  <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
                   <div>
                     <h3 className="text-xl font-bold text-white">Education</h3>
-                    <p className="text-purple-300 text-sm">Academic Foundation</p>
+                    <p className="text-blue-300 text-sm">Academic Foundation</p>
                   </div>
                 </div>
                 <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
-                <p className="text-purple-300 mb-2">SLIIT • Data Science Specialization</p>
+                <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
                 <div className="flex justify-between items-center text-gray-400 text-sm">
                   <span>GPA: 3.19</span>
                   <span>2022 - Present</span>
@@ -403,7 +397,7 @@ export default function ModernPortfolio() {
                   <div className="flex flex-wrap gap-2">
                     {["MERN Stack", "Next.js", "Machine Learning", "RESTful APIs", "DevOps", "Data Warehousing"].map(
                       (skill) => (
-                        <Badge key={skill} variant="secondary" className="bg-purple-800/30 text-purple-200">
+                        <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
                           {skill}
                         </Badge>
                       ),
@@ -414,53 +408,6 @@ export default function ModernPortfolio() {
             </Card>
 
             {/* Mission, Passion, Vision Cards */}
-            <Card className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-pink-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-              <CardContent className="p-0">
-                <div className="flex items-center mb-4">
-                  <Target className="w-10 h-10 text-pink-400 mr-3" />
-                  <div>
-                    <h3 className="text-xl font-bold text-white">My Mission</h3>
-                    <p className="text-pink-300 text-sm">Driving Innovation</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 leading-relaxed">
-                  To bridge data science and full-stack development, creating intelligent applications that solve
-                  real-world problems with elegant user experiences.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-              <CardContent className="p-0">
-                <div className="flex items-center mb-4">
-                  <Lightbulb className="w-10 h-10 text-purple-400 mr-3" />
-                  <div>
-                    <h3 className="text-xl font-bold text-white">My Passion</h3>
-                    <p className="text-purple-300 text-sm">Building & Learning</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 leading-relaxed">
-                  Passionate about leveraging cutting-edge technologies to build scalable, user-centric solutions that
-                  make a meaningful impact.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-pink-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-              <CardContent className="p-0">
-                <div className="flex items-center mb-4">
-                  <Handshake className="w-10 h-10 text-pink-400 mr-3" />
-                  <div>
-                    <h3 className="text-xl font-bold text-white">My Vision</h3>
-                    <p className="text-pink-300 text-sm">Future Contributions</p>
-                  </div>
-                </div>
-                <p className="text-gray-300 leading-relaxed">
-                  To become a leading innovator in the intersection of data science and software development,
-                  contributing to transformative digital solutions.
-                </p>
-              </CardContent>
-            </Card>
 
             {/* Contact Info Cards - Combined into one for better layout */}
             <Card className="lg:col-span-3 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
@@ -468,9 +415,9 @@ export default function ModernPortfolio() {
                 <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
-                    { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "purple" },
-                    { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "pink" },
-                    { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "purple" },
+                    { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
+                    { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
+                    { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
                   ].map(({ icon: Icon, label, value, color }) => (
                     <div
                       key={label}
@@ -487,13 +434,12 @@ export default function ModernPortfolio() {
           </div>
         </div>
       </section>
-
       {/* Selected Work Section */}
       <section id="work" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Selected Work
               </span>
             </h2>
@@ -537,7 +483,7 @@ export default function ModernPortfolio() {
                       {project.type}
                     </Badge>
                     <h3 className="text-4xl md:text-5xl font-black text-white mb-2">{project.title}</h3>
-                    <p className="text-xl text-purple-300 mb-4">{project.subtitle}</p>
+                    <p className="text-xl text-blue-300 mb-4">{project.subtitle}</p>
                     <p className="text-gray-300 leading-relaxed text-lg">{project.description}</p>
                   </div>
 
@@ -546,7 +492,7 @@ export default function ModernPortfolio() {
                       <Badge
                         key={tech}
                         variant="outline"
-                        className="border-purple-400/30 text-purple-300 bg-purple-900/20 backdrop-blur-sm px-3 py-1"
+                        className="border-blue-400/30 text-blue-300 bg-blue-900/20 backdrop-blur-sm px-3 py-1"
                       >
                         {tech}
                       </Badge>
@@ -576,13 +522,12 @@ export default function ModernPortfolio() {
           </div>
         </div>
       </section>
-
       {/* Skills Section */}
       <section id="skills" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Technical Arsenal
               </span>
             </h2>
@@ -595,7 +540,7 @@ export default function ModernPortfolio() {
             {skills.map((skill, index) => (
               <Card
                 key={skill.name}
-                className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 hover:border-purple-400/30 transition-all duration-500 group"
+                className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 hover:border-blue-400/30 transition-all duration-500 group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-6 text-center">
@@ -608,11 +553,11 @@ export default function ModernPortfolio() {
                   {/* Skill Level Bar */}
                   <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
                     <div
-                      className="bg-gradient-to-r from-purple-400 to-pink-400 h-2 rounded-full transition-all duration-1000 ease-out"
+                      className="bg-gradient-to-r from-blue-400 to-cyan-400 h-2 rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${skill.level}%` }}
                     ></div>
                   </div>
-                  <span className="text-xs text-purple-300">{skill.level}%</span>
+                  <span className="text-xs text-blue-300">{skill.level}%</span>
                 </CardContent>
               </Card>
             ))}
@@ -634,7 +579,7 @@ export default function ModernPortfolio() {
                       {cert.icon}
                     </div>
                     <h4 className="text-white font-semibold mb-2 text-sm leading-tight">{cert.title}</h4>
-                    <p className="text-purple-300 text-xs mb-1">{cert.issuer}</p>
+                    <p className="text-blue-300 text-xs mb-1">{cert.issuer}</p>
                     <p className="text-gray-400 text-xs">{cert.code}</p>
                   </CardContent>
                 </Card>
@@ -643,12 +588,11 @@ export default function ModernPortfolio() {
           </div>
         </div>
       </section>
-
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-black mb-8">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Let's Create Something Amazing
             </span>
           </h2>
@@ -659,7 +603,7 @@ export default function ModernPortfolio() {
           <div className="flex flex-wrap justify-center gap-6">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[220px] h-14"
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[220px] h-14"
             >
               <Mail className="w-5 h-5 mr-2" />
               Start a Conversation
@@ -667,7 +611,7 @@ export default function ModernPortfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
+              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
@@ -675,11 +619,10 @@ export default function ModernPortfolio() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="py-12 px-6 lg:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
             WG.dev
           </div>
           <p className="text-gray-400 mb-6">© 2024 Wimukthi Gunarathna. Crafted with passion and precision.</p>
