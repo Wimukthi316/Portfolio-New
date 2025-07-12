@@ -449,7 +449,7 @@ export default function ModernPortfolio() {
             </p>
           </div>
 
-          <div className="space-y-32">
+          <div className="space-y-16 lg:space-y-32">
             {projects.map((project, index) => (
               <div
                 key={index}
@@ -611,7 +611,7 @@ export default function ModernPortfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
+              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-14"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
