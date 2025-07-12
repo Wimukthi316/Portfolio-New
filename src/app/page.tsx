@@ -183,8 +183,6 @@ export default function ModernPortfolio() {
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
-      {" "}
-      {/* Removed bg-black */}
       {/* Animated Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-black to-blue-900/20"></div>
@@ -210,48 +208,53 @@ export default function ModernPortfolio() {
           ></div>
         ))}
       </div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-xl z-[100] border-b border-white/10 py-4">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              WG.dev
-            </div>
-
-            <div className="hidden md:flex space-x-8">
-              {["home", "about", "work", "skills", "contact"].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className="capitalize text-gray-300 hover:text-white transition-all duration-300 hover:scale-105 relative group"
-                >
-                  {section}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
-                </button>
-              ))}
-            </div>
-
-            <button className="md:hidden text-white z-[110]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl z-[100] transition-all duration-300">
+        <div className="bg-blue-950/70 backdrop-blur-xl rounded-full border border-white/10 shadow-xl shadow-blue-900/50 py-2 px-6 flex justify-between items-center">
+          <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
+            WG.dev
           </div>
 
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-white/10 bg-black/95 backdrop-blur-xl mt-4">
+          <div className="hidden md:flex space-x-8">
+            {["home", "about", "work", "skills", "contact"].map((section) => (
+              <button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                className="capitalize text-gray-300 font-medium hover:text-blue-300 transition-all duration-300 hover:scale-105 relative group"
+              >
+                {section}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+            ))}
+          </div>
+
+          <button className="md:hidden text-white z-[110]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Overlay */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center">
+            <button className="absolute top-6 right-6 text-white" onClick={() => setIsMenuOpen(false)}>
+              <X className="w-8 h-8" />
+            </button>
+            <div className="flex flex-col gap-6">
               {["home", "about", "work", "skills", "contact"].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className="block w-full text-left py-3 px-4 capitalize text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200"
+                  className="block w-full text-center py-4 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
                 >
                   {section}
                 </button>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </nav>
+
       {/* Hero Section */}
       <section
         id="home"
@@ -611,7 +614,7 @@ export default function ModernPortfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-14"
+              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
