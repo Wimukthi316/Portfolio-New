@@ -286,14 +286,18 @@ export default function ModernPortfolio() {
               development expertise. Passionate about building scalable solutions that make a difference.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 pt-8">
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-3 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300">
+            <div className="flex flex-wrap justify-center gap-6 pt-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[180px] h-14"
+              >
                 <Rocket className="w-5 h-5 mr-2" />
                 Let's Collaborate
               </Button>
               <Button
+                size="lg"
                 variant="outline"
-                className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-3 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent"
+                className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[160px] h-14"
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download CV
@@ -500,16 +504,18 @@ export default function ModernPortfolio() {
                     ))}
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="flex flex-wrap gap-4">
                     <Button
-                      className={`bg-gradient-to-r ${project.gradient} hover:scale-105 transition-all duration-300 px-6 py-3 rounded-full`}
+                      size="lg"
+                      className={`bg-gradient-to-r ${project.gradient} hover:scale-105 transition-all duration-300 px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl min-w-[140px] h-12`}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Project
                     </Button>
                     <Button
+                      size="lg"
                       variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-full bg-transparent"
+                      className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 py-3 rounded-full font-semibold bg-transparent transition-all duration-300 hover:shadow-lg min-w-[140px] h-12"
                     >
                       <Github className="w-4 h-4 mr-2" />
                       Source Code
@@ -602,13 +608,17 @@ export default function ModernPortfolio() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[220px] h-14"
+            >
               <Mail className="w-5 h-5 mr-2" />
               Start a Conversation
             </Button>
             <Button
+              size="lg"
               variant="outline"
-              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent"
+              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-14"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
