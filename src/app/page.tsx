@@ -26,25 +26,38 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion" // Import Framer Motion and AnimatePresence
 
-// Animated Hamburger Icon Component
+// Redesigned Animated Hamburger Icon Component
 const AnimatedHamburger = ({ isMenuOpen }: { isMenuOpen: boolean }) => (
-  <div className="relative w-6 h-6 flex flex-col justify-center items-center cursor-pointer">
-    <span
-      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out ${
-        isMenuOpen ? "rotate-45 translate-y-2" : ""
-      }`}
-    ></span>
-    <span
-      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out my-1 ${
-        isMenuOpen ? "opacity-0" : ""
-      }`}
-    ></span>
-    <span
-      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out ${
-        isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-      }`}
-    ></span>
-  </div>
+  <motion.div
+    className="relative w-6 h-6 flex flex-col justify-center items-center cursor-pointer"
+    initial={false}
+    animate={isMenuOpen ? "open" : "closed"}
+  >
+    <motion.span
+      className="block w-6 h-0.5 bg-white absolute"
+      variants={{
+        closed: { rotate: 0, y: -7 }, // Slightly more pronounced y
+        open: { rotate: 45, y: 0 },
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    ></motion.span>
+    <motion.span
+      className="block w-6 h-0.5 bg-white absolute"
+      variants={{
+        closed: { opacity: 1 },
+        open: { opacity: 0 },
+      }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+    ></motion.span>
+    <motion.span
+      className="block w-6 h-0.5 bg-white absolute"
+      variants={{
+        closed: { rotate: 0, y: 7 }, // Slightly more pronounced y
+        open: { rotate: -45, y: 0 },
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+    ></motion.span>
+  </motion.div>
 )
 
 export default function ModernPortfolio() {
@@ -272,44 +285,46 @@ export default function ModernPortfolio() {
     },
   }
 
-  // Variants for mobile menu overlay
+  // Redesigned Variants for mobile menu overlay
   const mobileMenuVariants = {
-    hidden: { opacity: 0, x: "100%" }, // Start off-screen to the right
+    hidden: { opacity: 0, scale: 0.8, y: -50 }, // Start slightly scaled down and above
     visible: {
       opacity: 1,
-      x: 0, // Slide in
+      scale: 1,
+      y: 0,
       transition: {
         type: "spring",
-        stiffness: 80,
-        damping: 15,
+        stiffness: 120, // Snappier
+        damping: 20,
         when: "beforeChildren",
         staggerChildren: 0.1,
       },
     },
     exit: {
       opacity: 0,
-      x: "100%", // Slide out to the right
+      scale: 0.8,
+      y: -50, // Exit back up and scaled down
       transition: {
         type: "spring",
-        stiffness: 80,
-        damping: 15,
+        stiffness: 120,
+        damping: 20,
         when: "afterChildren",
         staggerChildren: 0.05,
-        staggerDirection: -1, // Stagger out in reverse order
+        staggerDirection: -1,
       },
     },
   }
 
-  // Variants for individual mobile menu items
+  // Redesigned Variants for individual mobile menu items
   const mobileMenuItemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 40 }, // Start further down
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 100,
-        damping: 10,
+        stiffness: 180, // Very snappy
+        damping: 15,
       },
     },
     exit: {
@@ -335,6 +350,22 @@ export default function ModernPortfolio() {
             top: mousePosition.y - 192,
           }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        ></motion.div>
+        {/* New: Large, subtle pulsing radial gradient */}
+        <motion.div
+          className="absolute w-[800px] h-[800px] bg-gradient-to-r from-blue-500/15 to-cyan-500/15 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.05, 1],
+            opacity: [0.15, 0.2, 0.15],
+            x: ["-50%", "0%", "-50%"],
+            y: ["-50%", "0%", "-50%"],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
         ></motion.div>
         {/* Floating particles */}
         {[...Array(50)].map((_, i) => (
@@ -388,7 +419,7 @@ export default function ModernPortfolio() {
               animate="visible"
               exit="exit"
               variants={mobileMenuVariants}
-              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center pt-20 pb-6 overflow-y-auto"
+              className="fixed inset-0 bg-blue-950/98 backdrop-blur-xl z-[101] flex flex-col items-center justify-center p-6 overflow-y-auto"
             >
               <button
                 className="absolute top-4 right-4 text-white"
@@ -401,18 +432,18 @@ export default function ModernPortfolio() {
               {/* Branding inside mobile menu */}
               <motion.div
                 variants={mobileMenuItemVariants}
-                className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4"
+                className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-6"
               >
                 WG.dev
               </motion.div>
 
-              <motion.div variants={containerVariants} className="flex flex-col gap-2">
+              <motion.div variants={containerVariants} className="flex flex-col gap-3">
                 {["home", "about", "work", "skills", "contact"].map((section) => (
                   <motion.button
                     key={section}
                     variants={mobileMenuItemVariants}
                     onClick={() => scrollToSection(section)}
-                    className="block w-full text-center py-1.5 text-lg capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
+                    className="block w-full text-center py-2 text-xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
                   >
                     {section}
                   </motion.button>
@@ -420,7 +451,7 @@ export default function ModernPortfolio() {
               </motion.div>
 
               {/* Social icons inside mobile menu */}
-              <motion.div variants={containerVariants} className="flex justify-center space-x-3 mt-6">
+              <motion.div variants={containerVariants} className="flex justify-center space-x-4 mt-8">
                 {[
                   { icon: Github, href: "#", label: "GitHub" },
                   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -429,10 +460,10 @@ export default function ModernPortfolio() {
                   <motion.div key={label} variants={mobileMenuItemVariants} whileHover="hover">
                     <Link
                       href={href}
-                      className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
                       aria-label={label}
                     >
-                      <Icon className="w-4 h-4 text-gray-300 group-hover:text-white" />
+                      <Icon className="w-5 h-5 text-gray-300 group-hover:text-white" />
                     </Link>
                   </motion.div>
                 ))}
@@ -596,8 +627,12 @@ export default function ModernPortfolio() {
             </motion.div>
 
             {/* Education Card */}
-            <motion.div variants={itemVariants} whileHover="hover" custom={1}>
-              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+              custom={1}
+            >
+              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
                     <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
@@ -629,8 +664,12 @@ export default function ModernPortfolio() {
             </motion.div>
 
             {/* Core Technical Stack Card */}
-            <motion.div variants={itemVariants} whileHover="hover" custom={2}>
-              <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+              custom={2}
+            >
+              <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
                     <Layers className="w-10 h-10 text-cyan-400 mr-3" />
@@ -662,8 +701,12 @@ export default function ModernPortfolio() {
             </motion.div>
 
             {/* My Development Philosophy Card */}
-            <motion.div variants={itemVariants} whileHover="hover" custom={3}>
-              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+              custom={3}
+            >
+              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
                     <Lightbulb className="w-10 h-10 text-cyan-400 mr-3" />
@@ -740,9 +783,20 @@ export default function ModernPortfolio() {
               >
                 {/* Project Image */}
                 <div className="lg:w-1/2">
-                  <div className="relative group">
+                  <motion.div // Apply motion to this div for 3D tilt
+                    className="relative group"
+                    whileHover={{
+                      rotateX: 5, // Subtle tilt up
+                      rotateY: index % 2 === 0 ? 5 : -5, // Subtle tilt left/right
+                      scale: 1.02, // Slight scale up
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)", // More pronounced shadow
+                    }}
+                    transition={{ duration: 0.3 }}
+                    style={{ transformStyle: "preserve-3d" }} // Enable 3D transforms
+                  >
                     <div
                       className={`absolute inset-0 bg-gradient-to-r ${project.gradient} rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-500`}
+                      style={{ transform: "translateZ(-10px)" }} // Push blur back in 3D space
                     ></div>
                     <div className="relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-4 border border-white/10 hover:border-white/20 transition-all duration-500">
                       <Image
@@ -751,10 +805,11 @@ export default function ModernPortfolio() {
                         width={600}
                         height={400}
                         className="rounded-xl w-full h-auto"
+                        style={{ transform: "translateZ(20px)" }} // Pull image forward in 3D space
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Project Info */}
@@ -825,8 +880,13 @@ export default function ModernPortfolio() {
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
             {skills.map((skill, index) => (
-              <motion.div key={skill.name} variants={itemVariants} whileHover="hover" custom={index}>
-                <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 hover:border-blue-400/30 transition-all duration-500 group">
+              <motion.div
+                key={skill.name}
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                custom={index}
+              >
+                <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group">
                   <CardContent className="p-6 text-center">
                     <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                       {skill.logo}
@@ -859,8 +919,13 @@ export default function ModernPortfolio() {
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
               {certifications.map((cert, index) => (
-                <motion.div key={index} variants={itemVariants} whileHover="hover" custom={index}>
-                  <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 transition-all duration-500 group">
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                  custom={index}
+                >
+                  <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group">
                     <CardContent className="p-6 text-center">
                       <div
                         className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${cert.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
