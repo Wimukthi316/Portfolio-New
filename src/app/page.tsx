@@ -101,3 +101,18 @@ export default function Home() {
     </div>
   );
 }
+
+// next.config.ts
+const nextConfig = {
+  // ...existing config...
+  reactStrictMode: false, // (optional, not required)
+  // This disables React's hydration warnings in development
+  experimental: {
+    reactRoot: true,
+    serverActions: true,
+    // Add this line:
+    disableOptimizedLoading: true,
+  },
+};
+
+module.exports = nextConfig;
