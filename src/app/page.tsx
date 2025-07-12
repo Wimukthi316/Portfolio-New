@@ -26,11 +26,11 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion" // Import Framer Motion and AnimatePresence
 
 export default function ModernPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const sectionRefs = useRef<(HTMLElement | null)[]>([])
   const heroRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -41,37 +41,6 @@ export default function ModernPortfolio() {
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up")
-          } else {
-            entry.target.classList.remove("animate-fade-in-up") // Optional: reset animation when out of view
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }, // Adjust rootMargin to trigger earlier
-    )
-
-    sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
-
-    return () => {
-      sectionRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref)
-      })
-    }
-  }, [])
-
-  const addRef = (el: HTMLElement | null) => {
-    if (el && !sectionRefs.current.includes(el)) {
-      sectionRefs.current.push(el)
-    }
-  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -183,19 +152,171 @@ export default function ModernPortfolio() {
     },
   ]
 
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+  }
+
+  const heroTextVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 15,
+        delay: 0.3,
+      },
+    },
+  }
+
+  const heroTitleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+        delay: 0.1,
+      },
+    },
+  }
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 150,
+        damping: 15,
+        delay: 0.5,
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 10,
+      },
+    },
+    tap: {
+      scale: 0.95,
+    },
+  }
+
+  const socialIconVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 12,
+        delay: 0.7,
+      },
+    },
+    hover: {
+      scale: 1.2,
+      rotate: 10,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 10,
+      },
+    },
+  }
+
+  // Variants for mobile menu overlay
+  const mobileMenuVariants = {
+    hidden: { opacity: 0, x: "100%" }, // Start off-screen to the right
+    visible: {
+      opacity: 1,
+      x: 0, // Slide in
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 15,
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: "100%", // Slide out to the right
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 15,
+        when: "afterChildren",
+        staggerChildren: 0.05,
+        staggerDirection: -1, // Stagger out in reverse order
+      },
+    },
+  }
+
+  // Variants for individual mobile menu items
+  const mobileMenuItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+  }
+
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-black to-blue-900/20"></div>
-        <div
+        <motion.div // Framer Motion for mouse-following blur
           className="absolute w-96 h-96 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl"
-          style={{
+          animate={{
             left: mousePosition.x - 192,
             top: mousePosition.y - 192,
-            transition: "all 0.3s ease-out",
           }}
-        ></div>
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        ></motion.div>
         {/* Floating particles */}
         {[...Array(50)].map((_, i) => (
           <div
@@ -237,24 +358,33 @@ export default function ModernPortfolio() {
         </div>
 
         {/* Mobile Navigation Overlay */}
-        {isMenuOpen && (
-          <div className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center">
-            <button className="absolute top-6 right-6 text-white" onClick={() => setIsMenuOpen(false)}>
-              <X className="w-8 h-8" />
-            </button>
-            <div className="flex flex-col gap-6">
-              {["home", "about", "work", "skills", "contact"].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className="block w-full text-center py-4 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
-                >
-                  {section}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={mobileMenuVariants}
+              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center"
+            >
+              <button className="absolute top-6 right-6 text-white" onClick={() => setIsMenuOpen(false)}>
+                <X className="w-8 h-8" />
+              </button>
+              <motion.div variants={containerVariants} className="flex flex-col gap-6">
+                {["home", "about", "work", "skills", "contact"].map((section) => (
+                  <motion.button
+                    key={section}
+                    variants={mobileMenuItemVariants}
+                    onClick={() => scrollToSection(section)}
+                    className="block w-full text-center py-4 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
+                  >
+                    {section}
+                  </motion.button>
+                ))}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -265,7 +395,12 @@ export default function ModernPortfolio() {
       >
         <div className="max-w-6xl mx-auto text-center relative z-20">
           {/* Animated Profile Image */}
-          <div className="relative mb-8 inline-block">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0 }}
+            className="relative mb-8 inline-block"
+          >
             <div className="relative z-30">
               <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 p-1 animate-spin-slow">
                 <Image
@@ -280,20 +415,23 @@ export default function ModernPortfolio() {
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Animated Text */}
-          <div className="space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight">
+          <motion.div initial="hidden" animate="visible" variants={containerVariants} className="space-y-6">
+            <motion.h1
+              variants={heroTitleVariants}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight"
+            >
               <span className="block bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent animate-pulse">
                 Wimukthi
               </span>
               <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Gunarathna
               </span>
-            </h1>
+            </motion.h1>
 
-            <div className="text-lg sm:text-xl md:text-2xl text-gray-300 space-y-2">
+            <motion.div variants={heroTextVariants} className="text-lg sm:text-xl md:text-2xl text-gray-300 space-y-2">
               <div className="flex items-center justify-center space-x-2">
                 <Brain className="w-6 h-6 text-blue-400" />
                 <span>Data Science Undergraduate</span>
@@ -302,53 +440,66 @@ export default function ModernPortfolio() {
                 <Code2 className="w-6 h-6 text-cyan-400" />
                 <span>Full Stack Developer</span>
               </div>
-            </div>
+            </motion.div>
 
-            <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <motion.p
+              variants={heroTextVariants}
+              className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed"
+            >
               Crafting innovative digital experiences through the perfect blend of data science insights and full-stack
               development expertise. Passionate about building scalable solutions that make a difference.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 pt-8">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[160px] sm:min-w-[180px] h-12 sm:h-14"
-              >
-                <Rocket className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Let's Collaborate
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[140px] sm:min-w-[160px] h-12 sm:h-14"
-              >
-                <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Download CV
-              </Button>
-            </div>
+            <motion.div variants={containerVariants} className="flex flex-wrap justify-center gap-4 sm:gap-6 pt-8">
+              <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl min-w-[160px] sm:min-w-[180px] h-12 sm:h-14"
+                >
+                  <Rocket className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Let's Collaborate
+                </Button>
+              </motion.div>
+              <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold bg-transparent hover:shadow-lg min-w-[140px] sm:min-w-[160px] h-12 sm:h-14"
+                >
+                  <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Download CV
+                </Button>
+              </motion.div>
+            </motion.div>
 
-            <div className="flex justify-center space-x-4 sm:space-x-6 pt-8">
+            <motion.div variants={containerVariants} className="flex justify-center space-x-4 sm:space-x-6 pt-8">
               {[
                 { icon: Github, href: "#", label: "GitHub" },
                 { icon: Linkedin, href: "#", label: "LinkedIn" },
                 { icon: Globe, href: "#", label: "Portfolio" },
-              ].map(({ icon: Icon, href, label }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
-                >
-                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white" />
-                </Link>
+              ].map(({ icon: Icon, href, label }, index) => (
+                <motion.div key={label} variants={socialIconVariants} whileHover="hover">
+                  <Link
+                    href={href}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                  >
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white" />
+                  </Link>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: "easeInOut" }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        >
           <MousePointer className="w-6 h-6 text-gray-400" />
-        </div>
+        </motion.div>
       </section>
       {/* About Section - Revamped */}
       <section id="about" className="py-20 px-6 lg:px-8 relative z-10">
@@ -363,9 +514,15 @@ export default function ModernPortfolio() {
             <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4"></div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVariants}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          >
             {/* Main Profile Card */}
-            <div ref={addRef} className="animate-fade-in-up lg:col-span-2">
+            <motion.div variants={itemVariants} whileHover="hover" custom={0} className="lg:col-span-2">
               <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <CardContent className="p-0">
                   <h3 className="text-3xl font-bold text-white mb-6">My Journey & Expertise</h3>
@@ -381,10 +538,10 @@ export default function ModernPortfolio() {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Education Card */}
-            <div ref={addRef} className="animate-fade-in-up">
+            <motion.div variants={itemVariants} whileHover="hover" custom={1}>
               <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
@@ -414,10 +571,10 @@ export default function ModernPortfolio() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Core Technical Stack Card */}
-            <div ref={addRef} className="animate-fade-in-up">
+            <motion.div variants={itemVariants} whileHover="hover" custom={2}>
               <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
@@ -447,10 +604,10 @@ export default function ModernPortfolio() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* My Development Philosophy Card */}
-            <div ref={addRef} className="animate-fade-in-up">
+            <motion.div variants={itemVariants} whileHover="hover" custom={3}>
               <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <CardContent className="p-0">
                   <div className="flex items-center mb-4">
@@ -470,10 +627,10 @@ export default function ModernPortfolio() {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Contact Info Card */}
-            <div ref={addRef} className="animate-fade-in-up lg:col-span-3">
+            <motion.div variants={itemVariants} whileHover="hover" custom={4} className="lg:col-span-3">
               <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
                 <CardContent className="p-0">
                   <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
@@ -495,12 +652,12 @@ export default function ModernPortfolio() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
       {/* Selected Work Section */}
-      <section id="work" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
+      <section id="work" className="py-20 px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -516,8 +673,12 @@ export default function ModernPortfolio() {
 
           <div className="space-y-16 lg:space-y-32">
             {projects.map((project, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
                 className={`flex flex-col lg:flex-row items-center gap-12 ${
                   index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
@@ -582,13 +743,13 @@ export default function ModernPortfolio() {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
+      <section id="skills" className="py-20 px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -601,61 +762,76 @@ export default function ModernPortfolio() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVariants}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
             {skills.map((skill, index) => (
-              <Card
-                key={skill.name}
-                className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 hover:border-blue-400/30 transition-all duration-500 group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {skill.logo}
-                  </div>
-                  <h3 className="text-white font-semibold mb-2">{skill.name}</h3>
-                  <p className="text-xs text-gray-400 mb-3">{skill.category}</p>
+              <motion.div key={skill.name} variants={itemVariants} whileHover="hover" custom={index}>
+                <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 hover:border-blue-400/30 transition-all duration-500 group">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                      {skill.logo}
+                    </div>
+                    <h3 className="text-white font-semibold mb-2">{skill.name}</h3>
+                    <p className="text-xs text-gray-400 mb-3">{skill.category}</p>
 
-                  {/* Skill Level Bar */}
-                  <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
-                    <div
-                      className="bg-gradient-to-r from-blue-400 to-cyan-400 h-2 rounded-full transition-all duration-1000 ease-out"
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-blue-300">{skill.level}%</span>
-                </CardContent>
-              </Card>
+                    {/* Skill Level Bar */}
+                    <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+                      <div
+                        className="bg-gradient-to-r from-blue-400 to-cyan-400 h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${skill.level}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs text-blue-300">{skill.level}%</span>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Certifications */}
           <div className="mt-20">
             <h3 className="text-3xl font-bold text-center text-white mb-12">Professional Certifications</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={containerVariants}
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
               {certifications.map((cert, index) => (
-                <Card
-                  key={index}
-                  className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 transition-all duration-500 group"
-                >
-                  <CardContent className="p-6 text-center">
-                    <div
-                      className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${cert.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      {cert.icon}
-                    </div>
-                    <h4 className="text-white font-semibold mb-2 text-sm leading-tight">{cert.title}</h4>
-                    <p className="text-blue-300 text-xs mb-1">{cert.issuer}</p>
-                    <p className="text-gray-400 text-xs">{cert.code}</p>
-                  </CardContent>
-                </Card>
+                <motion.div key={index} variants={itemVariants} whileHover="hover" custom={index}>
+                  <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 transition-all duration-500 group">
+                    <CardContent className="p-6 text-center">
+                      <div
+                        className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${cert.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        {cert.icon}
+                      </div>
+                      <h4 className="text-white font-semibold mb-2 text-sm leading-tight">{cert.title}</h4>
+                      <p className="text-blue-300 text-xs mb-1">{cert.issuer}</p>
+                      <p className="text-gray-400 text-xs">{cert.code}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
-        <div className="max-w-4xl mx-auto text-center">
+      <section id="contact" className="py-20 px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
+        >
           <h2 className="text-5xl md:text-6xl font-black mb-8">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Let's Create Something Amazing
@@ -682,7 +858,7 @@ export default function ModernPortfolio() {
               Schedule a Call
             </Button>
           </div>
-        </div>
+        </motion.div>
       </section>
       {/* Footer */}
       <footer className="py-12 px-6 lg:px-8 border-t border-white/10 relative z-10">
