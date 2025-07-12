@@ -13,7 +13,6 @@ import {
   ExternalLink,
   Download,
   Sparkles,
-  Zap,
   Target,
   Rocket,
   Brain,
@@ -23,7 +22,8 @@ import {
   Menu,
   X,
   MousePointer,
-  Star,
+  Lightbulb,
+  Handshake,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -31,8 +31,8 @@ import Link from "next/link"
 export default function ModernPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState({})
-  const heroRef = useRef<HTMLDivElement>(null)
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
+  const heroRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -47,25 +47,46 @@ export default function ModernPortfolio() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }))
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up")
+          } else {
+            entry.target.classList.remove("animate-fade-in-up") // Optional: reset animation when out of view
+          }
         })
       },
-      { threshold: 0.1 },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }, // Adjust rootMargin to trigger earlier
     )
 
-    const sections = document.querySelectorAll("section[id]")
-    sections.forEach((section) => observer.observe(section))
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref)
+    })
 
-    return () => observer.disconnect()
+    return () => {
+      sectionRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref)
+      })
+    }
   }, [])
+
+  const addRef = (el: HTMLElement | null) => {
+    if (el && !sectionRefs.current.includes(el)) {
+      sectionRefs.current.push(el)
+    }
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      const offset = 90 // Height of fixed navbar
+      const bodyRect = document.body.getBoundingClientRect().top
+      const elementRect = element.getBoundingClientRect().top
+      const elementPosition = elementRect - bodyRect
+      const offsetPosition = elementPosition - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
     }
     setIsMenuOpen(false)
   }
@@ -192,9 +213,9 @@ export default function ModernPortfolio() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-xl z-[100] border-b border-white/10">
+      <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-xl z-[100] border-b border-white/10 py-4">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               WG.dev
             </div>
@@ -219,7 +240,7 @@ export default function ModernPortfolio() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-white/10 bg-black/95 backdrop-blur-xl">
+            <div className="md:hidden py-4 border-t border-white/10 bg-black/95 backdrop-blur-xl mt-4">
               {["home", "about", "work", "skills", "contact"].map((section) => (
                 <button
                   key={section}
@@ -237,7 +258,7 @@ export default function ModernPortfolio() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-24"
+        className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-24 md:pt-32"
         ref={heroRef}
       >
         <div className="max-w-6xl mx-auto text-center relative z-20">
@@ -328,119 +349,147 @@ export default function ModernPortfolio() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
+      {/* About Section - Revamped */}
+      <section id="about" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 About Me
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Bridging data insights with robust development to build impactful solutions.
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mt-4"></div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Animated Cards */}
-            <div className="space-y-6">
-              <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm hover:scale-105 transition-all duration-500">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Target className="w-8 h-8 text-purple-400 mr-3" />
-                    <h3 className="text-xl font-bold text-white">Mission</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    To bridge the gap between data science and full-stack development, creating intelligent applications
-                    that solve real-world problems with elegant user experiences.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-pink-500/20 backdrop-blur-sm hover:scale-105 transition-all duration-500 delay-100">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Zap className="w-8 h-8 text-pink-400 mr-3" />
-                    <h3 className="text-xl font-bold text-white">Passion</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    Passionate about leveraging cutting-edge technologies to build scalable, user-centric solutions that
-                    make a meaningful impact in the digital landscape.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm hover:scale-105 transition-all duration-500 delay-200">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Star className="w-8 h-8 text-yellow-400 mr-3" />
-                    <h3 className="text-xl font-bold text-white">Vision</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">
-                    To become a leading innovator in the intersection of data science and software development,
-                    contributing to transformative digital solutions.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column - Profile Info */}
-            <div className="space-y-8">
-              <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <h3 className="text-2xl font-bold text-white mb-6">Professional Profile</h3>
-                <p className="text-gray-300 leading-relaxed mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Profile Card */}
+            <Card className="lg:col-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <h3 className="text-3xl font-bold text-white mb-6">My Journey & Expertise</h3>
+                <p className="text-gray-300 leading-relaxed text-lg mb-6">
                   Detail-oriented Data Science undergraduate at SLIIT with hands-on experience in full-stack web
                   development, machine learning, and statistical analysis. Proficient in MERN stack, Next.js, RESTful
                   APIs, and DevOps practices.
                 </p>
-                <p className="text-gray-300 leading-relaxed">
-                  Proven ability to build scalable, user-centric solutions through academic and industry projects.
-                  Always eager to contribute to innovative teams and advance in data science and software development.
+                <p className="text-gray-300 leading-relaxed text-lg">
+                  I thrive on building scalable, user-centric solutions, proven through academic and industry projects.
+                  My passion lies in contributing to innovative teams and advancing the fields of data science and
+                  software development.
                 </p>
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Contact Info Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "purple" },
-                  { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "pink" },
-                  { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "purple" },
-                ].map(({ icon: Icon, label, value, color }) => (
-                  <Card
-                    key={label}
-                    className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm hover:scale-105 transition-all duration-300"
-                  >
-                    <CardContent className="p-4 text-center">
-                      <Icon className={`w-6 h-6 mx-auto mb-2 text-${color}-400`} />
-                      <p className="text-xs text-gray-400 mb-1">{label}</p>
-                      <p className="text-sm text-white font-semibold">{value}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+            {/* Education Card */}
+            <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <div className="flex items-center mb-4">
+                  <GraduationCap className="w-10 h-10 text-purple-400 mr-3" />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Education</h3>
+                    <p className="text-purple-300 text-sm">Academic Foundation</p>
+                  </div>
+                </div>
+                <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
+                <p className="text-purple-300 mb-2">SLIIT • Data Science Specialization</p>
+                <div className="flex justify-between items-center text-gray-400 text-sm">
+                  <span>GPA: 3.19</span>
+                  <span>2022 - Present</span>
+                </div>
+                <div className="mt-4">
+                  <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
+                  <div className="flex flex-wrap gap-2">
+                    {["MERN Stack", "Next.js", "Machine Learning", "RESTful APIs", "DevOps", "Data Warehousing"].map(
+                      (skill) => (
+                        <Badge key={skill} variant="secondary" className="bg-purple-800/30 text-purple-200">
+                          {skill}
+                        </Badge>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-              {/* Education Card */}
-              <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <GraduationCap className="w-8 h-8 text-purple-400 mr-3" />
-                    <div>
-                      <h3 className="text-lg font-bold text-white">BSc Information Technology</h3>
-                      <p className="text-purple-300">SLIIT • Data Science Specialization</p>
+            {/* Mission, Passion, Vision Cards */}
+            <Card className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-pink-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <div className="flex items-center mb-4">
+                  <Target className="w-10 h-10 text-pink-400 mr-3" />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">My Mission</h3>
+                    <p className="text-pink-300 text-sm">Driving Innovation</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  To bridge data science and full-stack development, creating intelligent applications that solve
+                  real-world problems with elegant user experiences.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <div className="flex items-center mb-4">
+                  <Lightbulb className="w-10 h-10 text-purple-400 mr-3" />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">My Passion</h3>
+                    <p className="text-purple-300 text-sm">Building & Learning</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  Passionate about leveraging cutting-edge technologies to build scalable, user-centric solutions that
+                  make a meaningful impact.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 border-pink-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <div className="flex items-center mb-4">
+                  <Handshake className="w-10 h-10 text-pink-400 mr-3" />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">My Vision</h3>
+                    <p className="text-pink-300 text-sm">Future Contributions</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  To become a leading innovator in the intersection of data science and software development,
+                  contributing to transformative digital solutions.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Contact Info Cards - Combined into one for better layout */}
+            <Card className="lg:col-span-3 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+              <CardContent className="p-0">
+                <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "purple" },
+                    { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "pink" },
+                    { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "purple" },
+                  ].map(({ icon: Icon, label, value, color }) => (
+                    <div
+                      key={label}
+                      className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
+                      <p className="text-sm text-gray-400 mb-1">{label}</p>
+                      <p className="text-base text-white font-semibold">{value}</p>
                     </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">GPA: 3.19</span>
-                    <span className="text-gray-400">2022 - Present</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Selected Work Section */}
-      <section id="work" className="py-20 px-6 lg:px-8 relative z-10">
+      <section id="work" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -529,7 +578,7 @@ export default function ModernPortfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 lg:px-8 relative z-10">
+      <section id="skills" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -596,7 +645,7 @@ export default function ModernPortfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 lg:px-8 relative z-10">
+      <section id="contact" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-black mb-8">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -618,7 +667,7 @@ export default function ModernPortfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-14"
+              className="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
