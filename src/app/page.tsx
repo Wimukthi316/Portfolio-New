@@ -352,9 +352,9 @@ export default function ModernPortfolio() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-2xl z-[100] transition-all duration-300">
-        <div className="bg-blue-950/70 backdrop-blur-xl rounded-full border border-white/10 shadow-xl shadow-blue-900/50 py-2 px-6 flex justify-between items-center">
-          <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-2xl z-[100] transition-all duration-300">
+        <div className="bg-blue-950/70 backdrop-blur-xl rounded-full border border-white/10 shadow-xl shadow-blue-900/50 py-1.5 px-4 flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
             WG.dev
           </div>
 
@@ -388,10 +388,10 @@ export default function ModernPortfolio() {
               animate="visible"
               exit="exit"
               variants={mobileMenuVariants}
-              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center py-12"
+              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center py-6"
             >
               <button
-                className="absolute top-6 right-6 text-white"
+                className="absolute top-4 right-4 text-white"
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -401,18 +401,18 @@ export default function ModernPortfolio() {
               {/* Branding inside mobile menu */}
               <motion.div
                 variants={mobileMenuItemVariants}
-                className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-12"
+                className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4"
               >
                 WG.dev
               </motion.div>
 
-              <motion.div variants={containerVariants} className="flex flex-col gap-6">
+              <motion.div variants={containerVariants} className="flex flex-col gap-2">
                 {["home", "about", "work", "skills", "contact"].map((section) => (
                   <motion.button
                     key={section}
                     variants={mobileMenuItemVariants}
                     onClick={() => scrollToSection(section)}
-                    className="block w-full text-center py-4 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
+                    className="block w-full text-center py-1.5 text-lg capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
                   >
                     {section}
                   </motion.button>
@@ -420,7 +420,7 @@ export default function ModernPortfolio() {
               </motion.div>
 
               {/* Social icons inside mobile menu */}
-              <motion.div variants={containerVariants} className="flex justify-center space-x-6 mt-12">
+              <motion.div variants={containerVariants} className="flex justify-center space-x-3 mt-6">
                 {[
                   { icon: Github, href: "#", label: "GitHub" },
                   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -429,10 +429,10 @@ export default function ModernPortfolio() {
                   <motion.div key={label} variants={mobileMenuItemVariants} whileHover="hover">
                     <Link
                       href={href}
-                      className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                      className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
                       aria-label={label}
                     >
-                      <Icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
+                      <Icon className="w-4 h-4 text-gray-300 group-hover:text-white" />
                     </Link>
                   </motion.div>
                 ))}
