@@ -18,8 +18,6 @@ import {
   Code2,
   Globe,
   GraduationCap,
-  Menu,
-  X,
   MousePointer,
   Lightbulb,
   Layers,
@@ -27,6 +25,27 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion" // Import Framer Motion and AnimatePresence
+
+// Animated Hamburger Icon Component
+const AnimatedHamburger = ({ isMenuOpen }: { isMenuOpen: boolean }) => (
+  <div className="relative w-6 h-6 flex flex-col justify-center items-center cursor-pointer">
+    <span
+      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out ${
+        isMenuOpen ? "rotate-45 translate-y-2" : ""
+      }`}
+    ></span>
+    <span
+      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out my-1 ${
+        isMenuOpen ? "opacity-0" : ""
+      }`}
+    ></span>
+    <span
+      className={`block w-6 h-0.5 bg-white transition-all duration-300 ease-in-out ${
+        isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+      }`}
+    ></span>
+  </div>
+)
 
 export default function ModernPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -352,8 +371,12 @@ export default function ModernPortfolio() {
             ))}
           </div>
 
-          <button className="md:hidden text-white z-[110]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button
+            className="md:hidden text-white z-[110]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <AnimatedHamburger isMenuOpen={isMenuOpen} />
           </button>
         </div>
 
@@ -365,11 +388,24 @@ export default function ModernPortfolio() {
               animate="visible"
               exit="exit"
               variants={mobileMenuVariants}
-              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center"
+              className="fixed inset-0 bg-blue-950/95 backdrop-blur-xl z-[101] flex flex-col items-center justify-center py-12"
             >
-              <button className="absolute top-6 right-6 text-white" onClick={() => setIsMenuOpen(false)}>
-                <X className="w-8 h-8" />
+              <button
+                className="absolute top-6 right-6 text-white"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <AnimatedHamburger isMenuOpen={true} /> {/* Always show X when menu is open */}
               </button>
+
+              {/* Branding inside mobile menu */}
+              <motion.div
+                variants={mobileMenuItemVariants}
+                className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-12"
+              >
+                WG.dev
+              </motion.div>
+
               <motion.div variants={containerVariants} className="flex flex-col gap-6">
                 {["home", "about", "work", "skills", "contact"].map((section) => (
                   <motion.button
@@ -380,6 +416,25 @@ export default function ModernPortfolio() {
                   >
                     {section}
                   </motion.button>
+                ))}
+              </motion.div>
+
+              {/* Social icons inside mobile menu */}
+              <motion.div variants={containerVariants} className="flex justify-center space-x-6 mt-12">
+                {[
+                  { icon: Github, href: "#", label: "GitHub" },
+                  { icon: Linkedin, href: "#", label: "LinkedIn" },
+                  { icon: Globe, href: "#", label: "Portfolio" },
+                ].map(({ icon: Icon, href, label }, index) => (
+                  <motion.div key={label} variants={mobileMenuItemVariants} whileHover="hover">
+                    <Link
+                      href={href}
+                      className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                      aria-label={label}
+                    >
+                      <Icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
+                    </Link>
+                  </motion.div>
                 ))}
               </motion.div>
             </motion.div>
@@ -852,7 +907,7 @@ export default function ModernPortfolio() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[180px] h-12"
+              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[220px] h-12"
             >
               <Phone className="w-5 h-5 mr-2" />
               Schedule a Call
