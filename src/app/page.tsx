@@ -192,7 +192,7 @@ export default function ModernPortfolio() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/80 backdrop-blur-xl z-50 border-b border-white/10">
+      <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-xl z-[100] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -212,19 +212,38 @@ export default function ModernPortfolio() {
               ))}
             </div>
 
-            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="md:hidden text-white z-[110]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t border-white/10 bg-black/95 backdrop-blur-xl">
+              {["home", "about", "work", "skills", "contact"].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className="block w-full text-left py-3 px-4 capitalize text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200"
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center px-6 lg:px-8" ref={heroRef}>
-        <div className="max-w-6xl mx-auto text-center relative z-10">
+      <section
+        id="home"
+        className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-24"
+        ref={heroRef}
+      >
+        <div className="max-w-6xl mx-auto text-center relative z-20">
           {/* Animated Profile Image */}
           <div className="relative mb-8 inline-block">
-            <div className="relative">
+            <div className="relative z-30">
               <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 p-1 animate-spin-slow">
                 <Image
                   src="/placeholder.svg?height=160&width=160"
@@ -234,7 +253,7 @@ export default function ModernPortfolio() {
                   className="rounded-full bg-black"
                 />
               </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce">
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce z-40">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
             </div>
@@ -300,7 +319,7 @@ export default function ModernPortfolio() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
           <MousePointer className="w-6 h-6 text-gray-400" />
         </div>
       </section>
