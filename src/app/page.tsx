@@ -183,33 +183,6 @@ export default function ModernPortfolio() {
     },
   ]
 
-  const timelineEvents = [
-    {
-      year: "2022 - Present",
-      title: "BSc Information Technology (Data Science Specialization)",
-      description:
-        "Currently pursuing my undergraduate degree at SLIIT, focusing on data science, machine learning, and full-stack development. Maintaining a GPA of 3.19.",
-      icon: GraduationCap,
-      badges: ["MERN Stack", "Next.js", "Machine Learning", "RESTful APIs", "DevOps", "Data Warehousing"],
-    },
-    {
-      year: "2023 - 2024",
-      title: "Lead Developer - E-commerce Platform",
-      description:
-        "Led a team of 3 developers to build a scalable e-commerce platform using React and Node.js, improving performance by 30% and user engagement by 15%.",
-      icon: Code2,
-      badges: ["React", "Node.js", "MongoDB", "Express.js", "Agile Methodologies"],
-    },
-    {
-      year: "2021 - 2022",
-      title: "Freelance Web Developer",
-      description:
-        "Developed and deployed various client websites, focusing on responsive design and SEO optimization. Gained experience in client communication and project management.",
-      icon: Globe,
-      badges: ["HTML", "CSS", "JavaScript", "WordPress", "UI/UX"],
-    },
-  ]
-
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
       {/* Animated Background */}
@@ -311,7 +284,7 @@ export default function ModernPortfolio() {
 
           {/* Animated Text */}
           <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-black leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight">
               <span className="block bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent animate-pulse">
                 Wimukthi
               </span>
@@ -320,7 +293,7 @@ export default function ModernPortfolio() {
               </span>
             </h1>
 
-            <div className="text-xl md:text-2xl text-gray-300 space-y-2">
+            <div className="text-lg sm:text-xl md:text-2xl text-gray-300 space-y-2">
               <div className="flex items-center justify-center space-x-2">
                 <Brain className="w-6 h-6 text-blue-400" />
                 <span>Data Science Undergraduate</span>
@@ -331,30 +304,30 @@ export default function ModernPortfolio() {
               </div>
             </div>
 
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
               Crafting innovative digital experiences through the perfect blend of data science insights and full-stack
               development expertise. Passionate about building scalable solutions that make a difference.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-6 pt-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 pt-8">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[180px] h-14"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[160px] sm:min-w-[180px] h-12 sm:h-14"
               >
-                <Rocket className="w-5 h-5 mr-2" />
+                <Rocket className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Let's Collaborate
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-8 py-4 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[160px] h-14"
+                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-transparent hover:shadow-lg min-w-[140px] sm:min-w-[160px] h-12 sm:h-14"
               >
-                <Download className="w-5 h-5 mr-2" />
+                <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Download CV
               </Button>
             </div>
 
-            <div className="flex justify-center space-x-6 pt-8">
+            <div className="flex justify-center space-x-4 sm:space-x-6 pt-8">
               {[
                 { icon: Github, href: "#", label: "GitHub" },
                 { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -363,9 +336,9 @@ export default function ModernPortfolio() {
                 <Link
                   key={label}
                   href={href}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
                 >
-                  <Icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 group-hover:text-white" />
                 </Link>
               ))}
             </div>
@@ -378,7 +351,7 @@ export default function ModernPortfolio() {
         </div>
       </section>
       {/* About Section - Revamped */}
-      <section id="about" className="py-20 px-6 lg:px-8 relative z-10" ref={addRef}>
+      <section id="about" className="py-20 px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-black mb-4">
@@ -392,132 +365,137 @@ export default function ModernPortfolio() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Profile Card */}
-            <Card className="lg:col-span-2 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-              <CardContent className="p-0">
-                <h3 className="text-3xl font-bold text-white mb-6">My Journey & Expertise</h3>
-                <p className="text-gray-300 leading-relaxed text-lg mb-6">
-                  Detail-oriented Data Science undergraduate at SLIIT with hands-on experience in full-stack web
-                  development, machine learning, and statistical analysis. Proficient in MERN stack, Next.js, RESTful
-                  APIs, and DevOps practices.
-                </p>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  I thrive on building scalable, user-centric solutions, proven through academic and industry projects.
-                  My passion lies in contributing to innovative teams and advancing the fields of data science and
-                  software development.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Nested grid for timeline and other cards */}
-            <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Professional Timeline Section */}
-              <div className="lg:col-span-2">
-                <h3 className="text-2xl font-bold text-white mb-6">My Professional Timeline</h3>
-                <div className="relative pl-8 border-l-2 border-blue-700/50 space-y-12">
-                  {timelineEvents.map((event, index) => (
-                    <div key={index} className="relative">
-                      <div className="absolute -left-4 top-0 w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
-                        <event.icon className="w-4 h-4 text-white" />
-                      </div>
-                      <Card className="ml-4 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-xl">
-                        <CardContent className="p-0">
-                          <p className="text-sm text-gray-400 mb-1">{event.year}</p>
-                          <h4 className="text-xl font-bold text-white mb-2">{event.title}</h4>
-                          <p className="text-gray-300 text-base">{event.description}</p>
-                          {event.badges && (
-                            <div className="flex flex-wrap gap-2 mt-3">
-                              {event.badges.map((badge) => (
-                                <Badge key={badge} variant="secondary" className="bg-blue-800/30 text-blue-200">
-                                  {badge}
-                                </Badge>
-                              ))}
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right column for Core Technical Stack and My Development Philosophy */}
-              <div className="lg:col-span-1 flex flex-col gap-8">
-                {/* Core Technical Stack Card */}
-                <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <Layers className="w-10 h-10 text-cyan-400 mr-3" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
-                        <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Frontend:</h4>
-                        <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Backend:</h4>
-                        <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Databases:</h4>
-                        <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Mobile:</h4>
-                        <p className="text-gray-300 text-sm">Kotlin</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* My Development Philosophy Card */}
-                <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <Lightbulb className="w-10 h-10 text-cyan-400 mr-3" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white">My Development Philosophy</h3>
-                        <p className="text-cyan-300 text-sm">Approach & Principles</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 leading-relaxed text-sm mb-3">
-                      I believe in crafting robust, scalable, and user-centric solutions. My approach emphasizes clean
-                      code, efficient algorithms, and continuous learning to adapt to evolving technologies.
-                    </p>
-                    <p className="text-gray-300 leading-relaxed text-sm">
-                      Collaboration and problem-solving are at the heart of my work, ensuring projects are not just
-                      functional but also innovative and maintainable.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+            <div ref={addRef} className="animate-fade-in-up lg:col-span-2">
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <h3 className="text-3xl font-bold text-white mb-6">My Journey & Expertise</h3>
+                  <p className="text-gray-300 leading-relaxed text-lg mb-6">
+                    Detail-oriented Data Science undergraduate at SLIIT with hands-on experience in full-stack web
+                    development, machine learning, and statistical analysis. Proficient in MERN stack, Next.js, RESTful
+                    APIs, and DevOps practices.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-lg">
+                    I thrive on building scalable, user-centric solutions, proven through academic and industry
+                    projects. My passion lies in contributing to innovative teams and advancing the fields of data
+                    science and software development.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
-            {/* Contact Info Card (outside the nested grid, spans full width of outer grid) */}
-            <Card className="lg:col-span-3 mt-8 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {[
-                    { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
-                    { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
-                    { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
-                  ].map(({ icon: Icon, label, value, color }) => (
-                    <div
-                      key={label}
-                      className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
-                    >
-                      <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
-                      <p className="text-sm text-gray-400 mb-1">{label}</p>
-                      <p className="text-base text-white font-semibold">{value}</p>
+            {/* Education Card */}
+            <div ref={addRef} className="animate-fade-in-up">
+              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Education</h3>
+                      <p className="text-blue-300 text-sm">Academic Foundation</p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
+                  <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
+                  <div className="flex justify-between items-center text-gray-400 text-sm">
+                    <span>GPA: 3.19</span>
+                    <span>2022 - Present</span>
+                  </div>
+                  <div className="mt-4">
+                    <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {["MERN Stack", "Next.js", "Machine Learning", "RESTful APIs", "DevOps", "Data Warehousing"].map(
+                        (skill) => (
+                          <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
+                            {skill}
+                          </Badge>
+                        ),
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Core Technical Stack Card */}
+            <div ref={addRef} className="animate-fade-in-up">
+              <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <Layers className="w-10 h-10 text-cyan-400 mr-3" />
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
+                      <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Frontend:</h4>
+                      <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Backend:</h4>
+                      <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Databases:</h4>
+                      <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-1">Mobile:</h4>
+                      <p className="text-gray-300 text-sm">Kotlin</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* My Development Philosophy Card */}
+            <div ref={addRef} className="animate-fade-in-up">
+              <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <Lightbulb className="w-10 h-10 text-cyan-400 mr-3" />
+                    <div>
+                      <h3 className="text-xl font-bold text-white">My Development Philosophy</h3>
+                      <p className="text-cyan-300 text-sm">Approach & Principles</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 leading-relaxed text-sm mb-3">
+                    I believe in crafting robust, scalable, and user-centric solutions. My approach emphasizes clean
+                    code, efficient algorithms, and continuous learning to adapt to evolving technologies.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed text-sm">
+                    Collaboration and problem-solving are at the heart of my work, ensuring projects are not just
+                    functional but also innovative and maintainable.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Contact Info Card */}
+            <div ref={addRef} className="animate-fade-in-up lg:col-span-3">
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
+                      { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
+                      { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
+                    ].map(({ icon: Icon, label, value, color }) => (
+                      <div
+                        key={label}
+                        className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
+                      >
+                        <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
+                        <p className="text-sm text-gray-400 mb-1">{label}</p>
+                        <p className="text-base text-white font-semibold">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
