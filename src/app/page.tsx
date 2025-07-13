@@ -32,6 +32,7 @@ const AnimatedHamburger = ({ isMenuOpen }: { isMenuOpen: boolean }) => (
     className="relative w-6 h-6 flex flex-col justify-center items-center cursor-pointer"
     initial={false}
     animate={isMenuOpen ? "open" : "closed"}
+    whileTap={{ scale: 0.9 }} // Added for tap feedback
   >
     <motion.span
       className="block w-6 h-0.5 bg-white absolute"
@@ -285,28 +286,38 @@ export default function ModernPortfolio() {
     },
   }
 
-  // Redesigned Variants for mobile menu overlay
+  // NEW: Radial Reveal variants for mobile menu overlay
   const mobileMenuVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: -50 }, // Start slightly scaled down and above
+    hidden: {
+      opacity: 0,
+      scale: 0,
+      borderRadius: "100%", // Start as a circle
+      x: "calc(50vw - 1.5rem)", // Position near top-right hamburger (adjust as needed)
+      y: "calc(-50vh + 1.5rem)", // Position near top-right hamburger (adjust as needed)
+    },
     visible: {
       opacity: 1,
       scale: 1,
+      borderRadius: "0%", // Expand to full screen
+      x: 0,
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 120, // Snappier
+        stiffness: 100,
         damping: 20,
         when: "beforeChildren",
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
     exit: {
       opacity: 0,
-      scale: 0.8,
-      y: -50, // Exit back up and scaled down
+      scale: 0,
+      borderRadius: "100%", // Shrink back to a circle
+      x: "calc(50vw - 1.5rem)", // Exit from top-right
+      y: "calc(-50vh + 1.5rem)", // Exit from top-right
       transition: {
         type: "spring",
-        stiffness: 120,
+        stiffness: 100,
         damping: 20,
         when: "afterChildren",
         staggerChildren: 0.05,
@@ -315,21 +326,23 @@ export default function ModernPortfolio() {
     },
   }
 
-  // Redesigned Variants for individual mobile menu items
+  // NEW: Menu item variants for radial reveal
   const mobileMenuItemVariants = {
-    hidden: { opacity: 0, y: 40 }, // Start further down
+    hidden: { opacity: 0, scale: 0.8, rotate: -45 },
     visible: {
       opacity: 1,
-      y: 0,
+      scale: 1,
+      rotate: 0,
       transition: {
         type: "spring",
-        stiffness: 180, // Very snappy
+        stiffness: 150,
         damping: 15,
       },
     },
     exit: {
       opacity: 0,
-      y: 20,
+      scale: 0.8,
+      rotate: 45,
       transition: {
         type: "spring",
         stiffness: 100,
@@ -383,8 +396,16 @@ export default function ModernPortfolio() {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-2xl z-[100] transition-all duration-300">
-        <div className="bg-blue-950/70 backdrop-blur-xl rounded-full border border-white/10 shadow-xl shadow-blue-900/50 py-1.5 px-4 flex justify-between items-center">
+      <nav
+        className="fixed z-[100] transition-all duration-300
+  md:top-4 md:left-1/2 md:-translate-x-1/2 md:w-[calc(100%-1.5rem)] md:max-w-2xl"
+      >
+        <div
+          className="bg-blue-950/70 backdrop-blur-xl
+    py-4 px-6 border-b border-white/10 w-full
+    md:rounded-full md:border md:border-white/10 md:shadow-xl md:shadow-blue-900/50 md:py-1.5 md:px-4
+    flex justify-between items-center max-w-2xl mx-auto"
+        >
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
             WG.dev
           </div>
@@ -426,32 +447,30 @@ export default function ModernPortfolio() {
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <AnimatedHamburger isMenuOpen={true} /> {/* Always show X when menu is open */}
+                <AnimatedHamburger isMenuOpen={true} />
               </button>
 
-              {/* Branding inside mobile menu */}
               <motion.div
                 variants={mobileMenuItemVariants}
-                className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-6"
+                className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8"
               >
                 WG.dev
               </motion.div>
 
-              <motion.div variants={containerVariants} className="flex flex-col gap-3">
+              <motion.div variants={containerVariants} className="flex flex-col gap-4">
                 {["home", "about", "work", "skills", "contact"].map((section) => (
                   <motion.button
                     key={section}
                     variants={mobileMenuItemVariants}
                     onClick={() => scrollToSection(section)}
-                    className="block w-full text-center py-2 text-xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
+                    className="block w-full text-center py-3 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
                   >
                     {section}
                   </motion.button>
                 ))}
               </motion.div>
 
-              {/* Social icons inside mobile menu */}
-              <motion.div variants={containerVariants} className="flex justify-center space-x-4 mt-8">
+              <motion.div variants={containerVariants} className="flex justify-center space-x-6 mt-10">
                 {[
                   { icon: Github, href: "#", label: "GitHub" },
                   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -460,10 +479,10 @@ export default function ModernPortfolio() {
                   <motion.div key={label} variants={mobileMenuItemVariants} whileHover="hover">
                     <Link
                       href={href}
-                      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                      className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
                       aria-label={label}
                     >
-                      <Icon className="w-5 h-5 text-gray-300 group-hover:text-white" />
+                      <Icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
                     </Link>
                   </motion.div>
                 ))}
@@ -789,7 +808,7 @@ export default function ModernPortfolio() {
                       rotateX: 5, // Subtle tilt up
                       rotateY: index % 2 === 0 ? 5 : -5, // Subtle tilt left/right
                       scale: 1.02, // Slight scale up
-                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)", // More pronounced shadow
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.3)", // More pronounced shadow
                     }}
                     transition={{ duration: 0.3 }}
                     style={{ transformStyle: "preserve-3d" }} // Enable 3D transforms
