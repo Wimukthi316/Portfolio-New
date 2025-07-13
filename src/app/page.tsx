@@ -21,13 +21,18 @@ import {
   MousePointer,
   Lightbulb,
   Layers,
+  Home,
+  User,
+  Briefcase,
+  Code,
+  X,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion" // Import Framer Motion and AnimatePresence
+import { motion } from "framer-motion" // Keep motion for other animations
 import TopNav from "@/components/top-nav" // Import the renamed top navigation component
 
-// Redesigned Animated Hamburger Icon Component
+// Redesigned Animated Hamburger Icon Component (remains for the toggle button)
 const AnimatedHamburger = ({ isMenuOpen }: { isMenuOpen: boolean }) => (
   <motion.div
     className="relative w-6 h-6 flex flex-col justify-center items-center cursor-pointer"
@@ -81,7 +86,7 @@ export default function ModernPortfolio() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
-    setIsMenuOpen(false)
+    setIsMenuOpen(false) // Close menu after navigation
   }
 
   const projects = [
@@ -177,7 +182,7 @@ export default function ModernPortfolio() {
     },
   ]
 
-  // Framer Motion Variants
+  // Framer Motion Variants (kept for other sections, but not for mobile menu overlay)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -278,70 +283,13 @@ export default function ModernPortfolio() {
     },
   }
 
-  // Radial Reveal variants for mobile menu overlay (remains the same)
-  const mobileMenuVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0,
-      borderRadius: "100%", // Start as a circle
-      x: "calc(50vw - 1.5rem)", // Position near top-right hamburger (adjust as needed)
-      y: "calc(-50vh + 1.5rem)", // Position near top-right hamburger (adjust as needed)
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      borderRadius: "0%", // Expand to full screen
-      x: 0,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        when: "beforeChildren",
-        staggerChildren: 0.08,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0,
-      borderRadius: "100%", // Shrink back to a circle
-      x: "calc(50vw - 1.5rem)", // Exit from top-right
-      y: "calc(-50vh + 1.5rem)", // Exit from top-right
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        when: "afterChildren",
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
-  }
-
-  // Menu item variants for radial reveal (remains the same)
-  const mobileMenuItemVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotate: -45 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 15,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      rotate: 45,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  }
+  const mobileNavItems = [
+    { id: "home", icon: Home, label: "Home" },
+    { id: "about", icon: User, label: "About" },
+    { id: "work", icon: Briefcase, label: "Work" },
+    { id: "skills", icon: Code, label: "Skills" },
+    { id: "contact", icon: Mail, label: "Contact" },
+  ]
 
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
@@ -388,85 +336,56 @@ export default function ModernPortfolio() {
       </div>
 
       {/* Mobile Navigation (Hamburger and Overlay) */}
-      <nav className="fixed top-0 left-0 w-full py-4 px-6 z-[100] md:hidden">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
-            WG.dev
-          </div>
-          <button
-            className="text-white z-[110]"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <AnimatedHamburger isMenuOpen={isMenuOpen} />
-          </button>
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 h-10 w-[calc(100%-2rem)] max-w-sm px-4 bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] flex md:hidden items-center justify-between transition-transform duration-300">
+        <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
+          WG
         </div>
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={mobileMenuVariants}
-              className="fixed inset-0 bg-blue-950/98 backdrop-blur-xl z-[101] flex flex-col items-center justify-center p-6 overflow-y-auto"
-            >
-              <button
-                className="absolute top-4 right-4 text-white"
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                <AnimatedHamburger isMenuOpen={true} />
-              </button>
-
-              <motion.div
-                variants={mobileMenuItemVariants}
-                className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8"
-              >
-                WG.dev
-              </motion.div>
-
-              <motion.div variants={containerVariants} className="flex flex-col gap-4">
-                {["home", "about", "work", "skills", "contact"].map((section) => (
-                  <motion.button
-                    key={section}
-                    variants={mobileMenuItemVariants}
-                    onClick={() => scrollToSection(section)}
-                    className="block w-full text-center py-3 text-2xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg"
-                  >
-                    {section}
-                  </motion.button>
-                ))}
-              </motion.div>
-
-              <motion.div variants={containerVariants} className="flex justify-center space-x-6 mt-10">
-                {[
-                  { icon: Github, href: "#", label: "GitHub" },
-                  { icon: Linkedin, href: "#", label: "LinkedIn" },
-                  { icon: Globe, href: "#", label: "Portfolio" },
-                ].map(({ icon: Icon, href, label }, index) => (
-                  <motion.div key={label} variants={mobileMenuItemVariants} whileHover="hover">
-                    <Link
-                      href={href}
-                      className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
-                      aria-label={label}
-                    >
-                      <Icon className="w-6 h-6 text-gray-300 group-hover:text-white" />
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <button
+          className="text-white z-[110]"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        >
+          <AnimatedHamburger isMenuOpen={isMenuOpen} />
+        </button>
       </nav>
+
+      {/* New Mobile Menu Overlay (Static, Top-Right) */}
+      {isMenuOpen && (
+        <div className="fixed top-4 right-4 max-h-[calc(100vh-2rem)] bg-blue-950 shadow-lg z-[101] flex flex-col p-4 overflow-y-auto opacity-90 w-52 border-0 rounded-2xl">
+          <div className="flex justify-between items-center mb-6">
+            <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              WG
+            </div>
+            <button className="text-white" onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            {mobileNavItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="flex items-center gap-3 w-full text-left py-2 text-lg capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-colors duration-200 rounded-md px-3"
+                >
+                  <Icon className="w-5 h-5 text-blue-300" />
+                  {item.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Social media icons removed as per user's request */}
+        </div>
+      )}
 
       {/* Desktop Top-Center Navigation */}
       <TopNav onNavigate={scrollToSection} />
 
-      {/* Main Content Wrapper - Adjusted for top navbar */}
+      {/* Main Content Wrapper */}
       <div className="">
-        {" "}
-        {/* Removed md:ml-20 */}
         {/* Hero Section */}
         <section
           id="home"
@@ -905,46 +824,58 @@ export default function ModernPortfolio() {
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
-                      <span className="text-xs text-blue-300">{skill.level}%</span>
+                    </CardContent>
+                    <span className="text-xs text-blue-300">{skill.level}%</span>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+        {/* Certifications Section */}
+        <section id="certifications" className="py-20 px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-6xl font-black mb-4">
+                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  Professional Certifications
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                A collection of my professional certifications highlighting my expertise and commitment to continuous
+                learning.
+              </p>
+            </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={containerVariants}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {certifications.map((cert, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                  custom={index}
+                >
+                  <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group">
+                    <CardContent className="p-6 text-center">
+                      <div
+                        className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${cert.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        {cert.icon}
+                      </div>
+                      <h4 className="text-white font-semibold mb-2 text-sm leading-tight">{cert.title}</h4>
+                      <p className="text-blue-300 text-xs mb-1">{cert.issuer}</p>
+                      <p className="text-gray-400 text-xs">{cert.code}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </motion.div>
-
-            {/* Certifications */}
-            <div className="mt-20">
-              <h3 className="text-3xl font-bold text-center text-white mb-12">Professional Certifications</h3>
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={containerVariants}
-                className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-              >
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                    custom={index}
-                  >
-                    <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group">
-                      <CardContent className="p-6 text-center">
-                        <div
-                          className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${cert.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
-                        >
-                          {cert.icon}
-                        </div>
-                        <h4 className="text-white font-semibold mb-2 text-sm leading-tight">{cert.title}</h4>
-                        <p className="text-blue-300 text-xs mb-1">{cert.issuer}</p>
-                        <p className="text-gray-400 text-xs">{cert.code}</p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
           </div>
         </section>
         {/* Contact Section */}
@@ -984,31 +915,31 @@ export default function ModernPortfolio() {
             </div>
           </motion.div>
         </section>
-        {/* Footer */}
-        <footer className="py-12 px-6 lg:px-8 border-t border-white/10 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-              WG.dev
-            </div>
-            <p className="text-gray-400 mb-6">© 2024 Wimukthi Gunarathna. Crafted with passion and precision.</p>
-            <div className="flex justify-center space-x-6">
-              {[
-                { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Globe, href: "#", label: "Portfolio" },
-              ].map(({ icon: Icon, href, label }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
-                >
-                  <Icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </footer>
       </div>
+      {/* Footer */}
+      <footer className="py-12 px-6 lg:px-8 border-t border-white/10 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
+            WG
+          </div>
+          <p className="text-gray-400 mb-6">© 2024 Wimukthi Gunarathna. Crafted with passion and precision.</p>
+          <div className="flex justify-center space-x-6">
+            {[
+              { icon: Github, href: "#", label: "GitHub" },
+              { icon: Linkedin, href: "#", label: "LinkedIn" },
+              { icon: Globe, href: "#", label: "Portfolio" },
+            ].map(({ icon: Icon, href, label }) => (
+              <Link
+                key={label}
+                href={href}
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110 group"
+              >
+                <Icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
