@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs" // Import Tabs components
 import {
   Github,
   Linkedin,
@@ -19,13 +20,16 @@ import {
   Globe,
   GraduationCap,
   MousePointer,
-  Lightbulb,
   Layers,
   Home,
   User,
   Briefcase,
   Code,
   X,
+  Monitor,
+  Server,
+  Database,
+  Smartphone,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -283,6 +287,7 @@ export default function ModernPortfolio() {
     },
   }
 
+  // Mobile nav items with icons
   const mobileNavItems = [
     { id: "home", icon: Home, label: "Home" },
     { id: "about", icon: User, label: "About" },
@@ -338,7 +343,7 @@ export default function ModernPortfolio() {
       {/* Mobile Navigation (Hamburger and Overlay) */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 h-10 w-[calc(100%-2rem)] max-w-sm px-4 bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] flex md:hidden items-center justify-between transition-transform duration-300">
         <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
-          WG
+          WG.dev
         </div>
         <button
           className="text-white z-[110]"
@@ -349,41 +354,84 @@ export default function ModernPortfolio() {
         </button>
       </nav>
 
-      {/* New Mobile Menu Overlay (Static, Top-Right) */}
+      {/* New Mobile Menu Overlay (Full-screen, with portfolio styling) */}
       {isMenuOpen && (
-        <div className="fixed top-4 right-4 max-h-[calc(100vh-2rem)] bg-blue-950 shadow-lg z-[101] flex flex-col p-4 overflow-y-auto opacity-90 w-52 border-0 rounded-2xl">
-          <div className="flex justify-between items-center mb-6">
-            <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              WG
+        <motion.div
+          className="fixed inset-0 bg-blue-950/98 backdrop-blur-xl z-[101] flex flex-col p-6"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.07,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+        >
+          <div className="flex justify-between items-center w-full mb-12">
+            <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              WG.dev {/* Initials with gradient */}
             </div>
-            <button className="text-white" onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
-              <X className="w-6 h-6" />
+            <button
+              className="text-white p-2" // Close button is text-white
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="w-8 h-8" /> {/* Larger X icon */}
             </button>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <motion.div
+            className="flex flex-col gap-4 w-full flex-1 items-center justify-center" // Centered layout
+            variants={{
+              hidden: { y: 20, opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.07,
+                  delayChildren: 0.2,
+                },
+              },
+            }}
+          >
             {mobileNavItems.map((item) => {
               const Icon = item.icon
               return (
-                <button
+                <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-3 w-full text-left py-2 text-lg capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-colors duration-200 rounded-md px-3"
+                  className="block w-full text-center py-3 text-xl capitalize text-gray-300 font-medium hover:text-blue-300 hover:bg-white/5 transition-all duration-200 rounded-lg px-4"
+                  variants={{
+                    hidden: { y: 20, opacity: 0 },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 20,
+                      },
+                    },
+                  }}
                 >
-                  <Icon className="w-5 h-5 text-blue-300" />
-                  {item.label}
-                </button>
+                  <div className="flex items-center justify-center gap-3">
+                    <Icon className="w-6 h-6 text-blue-300" />
+                    {item.label}
+                  </div>
+                </motion.button>
               )
             })}
-          </div>
-
-          {/* Social media icons removed as per user's request */}
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {/* Desktop Top-Center Navigation */}
       <TopNav onNavigate={scrollToSection} />
-
       {/* Main Content Wrapper */}
       <div className="">
         {/* Hero Section */}
@@ -415,7 +463,6 @@ export default function ModernPortfolio() {
                 </div>
               </div>
             </motion.div>
-
             {/* Animated Text */}
             <motion.div initial="hidden" animate="visible" variants={containerVariants} className="space-y-6">
               <motion.h1
@@ -429,7 +476,6 @@ export default function ModernPortfolio() {
                   Gunarathna
                 </span>
               </motion.h1>
-
               <motion.div
                 variants={heroTextVariants}
                 className="text-lg sm:text-xl md:text-2xl text-gray-300 space-y-2"
@@ -443,7 +489,6 @@ export default function ModernPortfolio() {
                   <span>Full Stack Developer</span>
                 </div>
               </motion.div>
-
               <motion.p
                 variants={heroTextVariants}
                 className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed"
@@ -451,7 +496,6 @@ export default function ModernPortfolio() {
                 Crafting innovative digital experiences through the perfect blend of data science insights and
                 full-stack development expertise. Passionate about building scalable solutions that make a difference.
               </motion.p>
-
               <motion.div variants={containerVariants} className="flex flex-wrap justify-center gap-4 sm:gap-6 pt-8">
                 <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
                   <Button
@@ -473,7 +517,6 @@ export default function ModernPortfolio() {
                   </Button>
                 </motion.div>
               </motion.div>
-
               <motion.div variants={containerVariants} className="flex justify-center space-x-4 sm:space-x-6 pt-8">
                 {[
                   { icon: Github, href: "#", label: "GitHub" },
@@ -492,18 +535,19 @@ export default function ModernPortfolio() {
               </motion.div>
             </motion.div>
           </div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: "easeInOut" }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-          >
-            <MousePointer className="w-6 h-6 text-gray-400" />
-          </motion.div>
         </section>
-        {/* About Section - Revamped */}
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5, ease: "easeInOut" }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        >
+          <MousePointer className="w-6 h-6 text-gray-400" />
+        </motion.div>
+
+        {/* About Section - Revamped with Tabs */}
         <section id="about" className="py-20 px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
@@ -515,168 +559,195 @@ export default function ModernPortfolio() {
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
                 Bridging data insights with robust development to build impactful solutions.
               </p>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4 group-hover:w-32 transition-all duration-300"></div>
             </div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={containerVariants}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-            >
-              {/* Main Profile Card */}
-              <motion.div variants={itemVariants} whileHover="hover" custom={0} className="lg:col-span-2">
-                <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <h3 className="text-3xl font-bold text-white mb-6">My Journey & Expertise</h3>
-                    <p className="text-gray-300 leading-relaxed text-lg mb-6">
-                      Detail-oriented Data Science undergraduate at SLIIT with hands-on experience in full-stack web
-                      development, machine learning, and statistical analysis. Proficient in MERN stack, Next.js,
-                      RESTful APIs, and DevOps practices.
-                    </p>
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                      I thrive on building scalable, user-centric solutions, proven through academic and industry
-                      projects. My passion lies in contributing to innovative teams and advancing the fields of data
-                      science and software development.
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+            <div className="max-w-4xl mx-auto">
+              <Tabs defaultValue="journey" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 h-auto p-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg">
+                  <TabsTrigger
+                    value="journey"
+                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
+                  >
+                    My Journey
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="education"
+                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
+                  >
+                    Education
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="skills"
+                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
+                  >
+                    Technical Stack
+                  </TabsTrigger>
+                </TabsList>
 
-              {/* Education Card */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                custom={1}
-              >
-                <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white">Education</h3>
-                        <p className="text-blue-300 text-sm">Academic Foundation</p>
-                      </div>
+                <TabsContent value="journey" className="mt-8">
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    className="relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl transition-all duration-500 transform hover:-translate-y-1 group"
+                  >
+                    {/* Subtle background pattern/gradient */}
+                    <div className="absolute inset-0 opacity-10 pointer-events-none">
+                      <div className="absolute inset-0 bg-[url('/placeholder.svg?height=200&width=200')] bg-repeat opacity-5"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5"></div>
                     </div>
-                    <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
-                    <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
-                    <div className="flex justify-between items-center text-gray-400 text-sm">
-                      <span>GPA: 3.19</span>
-                      <span>2022 - Present</span>
-                    </div>
-                    <div className="mt-4">
-                      <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "MERN Stack",
-                          "Next.js",
-                          "Machine Learning",
-                          "RESTful APIs",
-                          "DevOps",
-                          "Data Warehousing",
-                        ].map((skill) => (
-                          <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
 
-              {/* Core Technical Stack Card */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                custom={2}
-              >
-                <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <Layers className="w-10 h-10 text-cyan-400 mr-3" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
-                        <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Frontend:</h4>
-                        <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Backend:</h4>
-                        <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Databases:</h4>
-                        <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-white mb-1">Mobile:</h4>
-                        <p className="text-gray-300 text-sm">Kotlin</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                    <CardContent className="relative z-10 p-0">
+                      <h3 className="text-3xl font-bold text-white mb-6 flex items-center justify-center lg:justify-start gap-3">
+                        <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
+                        My Journey & Expertise
+                      </h3>
+                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-4">
+                        As a detail-oriented Data Science undergraduate at SLIIT, I bring a unique blend of analytical
+                        rigor and practical development skills. My academic journey has equipped me with a strong
+                        foundation in machine learning, statistical analysis, and data warehousing.
+                      </motion.p>
+                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-6">
+                        Beyond theory, I have hands-on experience in full-stack web development, proficient in the MERN
+                        stack, Next.js, and building robust RESTful APIs. I'm also adept at integrating DevOps practices
+                        to streamline development workflows and ensure scalable, efficient solutions.
+                      </motion.p>
+                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg">
+                        My passion lies in contributing to innovative teams and advancing the fields of data science and
+                        software development, always striving to build solutions that make a tangible difference.
+                      </motion.p>
+                    </CardContent>
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/50 transition-all duration-300 pointer-events-none"></div>
+                  </motion.div>
+                </TabsContent>
 
-              {/* My Development Philosophy Card */}
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                custom={3}
-              >
-                <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-4">
-                      <Lightbulb className="w-10 h-10 text-cyan-400 mr-3" />
-                      <div>
-                        <h3 className="text-xl font-bold text-white">My Development Philosophy</h3>
-                        <p className="text-cyan-300 text-sm">Approach & Principles</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 leading-relaxed text-sm mb-3">
-                      I believe in crafting robust, scalable, and user-centric solutions. My approach emphasizes clean
-                      code, efficient algorithms, and continuous learning to adapt to evolving technologies.
-                    </p>
-                    <p className="text-gray-300 leading-relaxed text-sm">
-                      Collaboration and problem-solving are at the heart of my work, ensuring projects are not just
-                      functional but also innovative and maintainable.
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              {/* Contact Info Card */}
-              <motion.div variants={itemVariants} whileHover="hover" custom={4} className="lg:col-span-3">
-                <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      {[
-                        { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
-                        { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
-                        { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
-                      ].map(({ icon: Icon, label, value, color }) => (
-                        <div
-                          key={label}
-                          className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
-                        >
-                          <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
-                          <p className="text-sm text-gray-400 mb-1">{label}</p>
-                          <p className="text-base text-white font-semibold">{value}</p>
+                <TabsContent value="education" className="mt-8">
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform hover:-translate-y-1"
+                  >
+                    <CardContent className="p-0">
+                      <div className="flex items-center mb-4">
+                        <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
+                        <div>
+                          <h3 className="text-xl font-bold text-white">Education</h3>
+                          <p className="text-blue-300 text-sm">Academic Foundation</p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                      </div>
+                      <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
+                      <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
+                      <div className="flex justify-between items-center text-gray-400 text-sm">
+                        <span>GPA: 3.19</span>
+                        <span>2022 - Present</span>
+                      </div>
+                      <div className="mt-4">
+                        <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            "MERN Stack",
+                            "Next.js",
+                            "Machine Learning",
+                            "RESTful APIs",
+                            "DevOps",
+                            "Data Warehousing",
+                          ].map((skill) => (
+                            <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="skills" className="mt-8">
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform hover:-translate-y-1"
+                  >
+                    <CardContent className="p-0">
+                      <div className="flex items-center mb-4">
+                        <Layers className="w-10 h-10 text-cyan-400 mr-3" />
+                        <div>
+                          <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
+                          <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          <Monitor className="w-6 h-6 text-blue-400" />
+                          <div>
+                            <h4 className="font-semibold text-white mb-1">Frontend:</h4>
+                            <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Server className="w-6 h-6 text-cyan-400" />
+                          <div>
+                            <h4 className="font-semibold text-white mb-1">Backend:</h4>
+                            <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Database className="w-6 h-6 text-blue-400" />
+                          <div>
+                            <h4 className="font-semibold text-white mb-1">Databases:</h4>
+                            <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Smartphone className="w-6 h-6 text-cyan-400" />
+                          <div>
+                            <h4 className="font-semibold text-white mb-1">Mobile:</h4>
+                            <p className="text-gray-300 text-sm">Kotlin</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </motion.div>
+                </TabsContent>
+              </Tabs>
+            </div>
+
+            {/* Contact Info Card (remains outside tabs, full width) */}
+            <motion.div
+              variants={itemVariants}
+              whileHover="hover"
+              custom={4}
+              className="max-w-4xl mx-auto mt-12" // Adjusted margin-top and width
+            >
+              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                <CardContent className="p-0">
+                  <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
+                      { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
+                      { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
+                    ].map(({ icon: Icon, label, value, color }) => (
+                      <div
+                        key={label}
+                        className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
+                      >
+                        <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
+                        <p className="text-sm text-gray-400 mb-1">{label}</p>
+                        <p className="text-base text-white font-semibold">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </section>
+
         {/* Selected Work Section */}
         <section id="work" className="py-20 px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -781,6 +852,7 @@ export default function ModernPortfolio() {
             </div>
           </div>
         </section>
+
         {/* Skills Section */}
         <section id="skills" className="py-20 px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -824,14 +896,15 @@ export default function ModernPortfolio() {
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
+                      <span className="text-xs text-blue-300">{skill.level}%</span>
                     </CardContent>
-                    <span className="text-xs text-blue-300">{skill.level}%</span>
                   </Card>
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
+
         {/* Certifications Section */}
         <section id="certifications" className="py-20 px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -878,6 +951,7 @@ export default function ModernPortfolio() {
             </motion.div>
           </div>
         </section>
+
         {/* Contact Section */}
         <section id="contact" className="py-20 px-6 lg:px-8 relative z-10">
           <motion.div
@@ -920,7 +994,7 @@ export default function ModernPortfolio() {
       <footer className="py-12 px-6 lg:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
-            WG
+            WG.dev
           </div>
           <p className="text-gray-400 mb-6">© 2024 Wimukthi Gunarathna. Crafted with passion and precision.</p>
           <div className="flex justify-center space-x-6">

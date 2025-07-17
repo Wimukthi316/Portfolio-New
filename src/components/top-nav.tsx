@@ -62,7 +62,7 @@ export default function TopNav({ onNavigate }: TopNavProps) {
     >
       {/* My Name Initials */}
       <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 mr-4">
-        WG
+        WG.dev
       </div>
       <div className="relative flex flex-row items-center justify-center h-full">
         {/* Active Timeline Line (horizontal) */}
