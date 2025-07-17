@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs" // Import Tabs components
 import {
   Github,
   Linkedin,
@@ -562,188 +561,162 @@ export default function ModernPortfolio() {
               <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4 group-hover:w-32 transition-all duration-300"></div>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="journey" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 h-auto p-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg">
-                  <TabsTrigger
-                    value="journey"
-                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
-                  >
-                    My Journey
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="education"
-                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
-                  >
-                    Education
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="skills"
-                    className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white data-[state=active]:shadow-md rounded-lg py-2 text-base font-semibold text-gray-300 hover:text-white transition-all duration-300"
-                  >
-                    Technical Stack
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="journey" className="mt-8">
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                    className="relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl transition-all duration-500 transform hover:-translate-y-1 group"
-                  >
-                    {/* Subtle background pattern/gradient */}
-                    <div className="absolute inset-0 opacity-10 pointer-events-none">
-                      <div className="absolute inset-0 bg-[url('/placeholder.svg?height=200&width=200')] bg-repeat opacity-5"></div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5"></div>
-                    </div>
-
-                    <CardContent className="relative z-10 p-0">
-                      <h3 className="text-3xl font-bold text-white mb-6 flex items-center justify-center lg:justify-start gap-3">
-                        <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
-                        My Journey & Expertise
-                      </h3>
-                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-4">
-                        As a detail-oriented Data Science undergraduate at SLIIT, I bring a unique blend of analytical
-                        rigor and practical development skills. My academic journey has equipped me with a strong
-                        foundation in machine learning, statistical analysis, and data warehousing.
-                      </motion.p>
-                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-6">
-                        Beyond theory, I have hands-on experience in full-stack web development, proficient in the MERN
-                        stack, Next.js, and building robust RESTful APIs. I'm also adept at integrating DevOps practices
-                        to streamline development workflows and ensure scalable, efficient solutions.
-                      </motion.p>
-                      <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg">
-                        My passion lies in contributing to innovative teams and advancing the fields of data science and
-                        software development, always striving to build solutions that make a tangible difference.
-                      </motion.p>
-                    </CardContent>
-                    {/* Hover glow effect */}
-                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/50 transition-all duration-300 pointer-events-none"></div>
-                  </motion.div>
-                </TabsContent>
-
-                <TabsContent value="education" className="mt-8">
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                    className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform hover:-translate-y-1"
-                  >
-                    <CardContent className="p-0">
-                      <div className="flex items-center mb-4">
-                        <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
-                        <div>
-                          <h3 className="text-xl font-bold text-white">Education</h3>
-                          <p className="text-blue-300 text-sm">Academic Foundation</p>
-                        </div>
-                      </div>
-                      <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
-                      <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
-                      <div className="flex justify-between items-center text-gray-400 text-sm">
-                        <span>GPA: 3.19</span>
-                        <span>2022 - Present</span>
-                      </div>
-                      <div className="mt-4">
-                        <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {[
-                            "MERN Stack",
-                            "Next.js",
-                            "Machine Learning",
-                            "RESTful APIs",
-                            "DevOps",
-                            "Data Warehousing",
-                          ].map((skill) => (
-                            <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </motion.div>
-                </TabsContent>
-
-                <TabsContent value="skills" className="mt-8">
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                    className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform hover:-translate-y-1"
-                  >
-                    <CardContent className="p-0">
-                      <div className="flex items-center mb-4">
-                        <Layers className="w-10 h-10 text-cyan-400 mr-3" />
-                        <div>
-                          <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
-                          <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
-                        </div>
-                      </div>
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <Monitor className="w-6 h-6 text-blue-400" />
-                          <div>
-                            <h4 className="font-semibold text-white mb-1">Frontend:</h4>
-                            <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Server className="w-6 h-6 text-cyan-400" />
-                          <div>
-                            <h4 className="font-semibold text-white mb-1">Backend:</h4>
-                            <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Database className="w-6 h-6 text-blue-400" />
-                          <div>
-                            <h4 className="font-semibold text-white mb-1">Databases:</h4>
-                            <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Smartphone className="w-6 h-6 text-cyan-400" />
-                          <div>
-                            <h4 className="font-semibold text-white mb-1">Mobile:</h4>
-                            <p className="text-gray-300 text-sm">Kotlin</p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </motion.div>
-                </TabsContent>
-              </Tabs>
-            </div>
-
-            {/* Contact Info Card (remains outside tabs, full width) */}
             <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              custom={4}
-              className="max-w-4xl mx-auto mt-12" // Adjusted margin-top and width
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={containerVariants}
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
             >
-              <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-                <CardContent className="p-0">
-                  <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {[
-                      { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
-                      { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
-                      { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
-                    ].map(({ icon: Icon, label, value, color }) => (
-                      <div
-                        key={label}
-                        className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
-                      >
-                        <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
-                        <p className="text-sm text-gray-400 mb-1">{label}</p>
-                        <p className="text-base text-white font-semibold">{value}</p>
-                      </div>
-                    ))}
+              {/* Main Profile Card */}
+              <motion.div variants={itemVariants} custom={0} className="lg:col-span-2">
+                <Card className="relative overflow-hidden bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl transition-all duration-500 transform hover:-translate-y-1 group">
+                  {/* Subtle background pattern/gradient */}
+                  <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=200&width=200')] bg-repeat opacity-5"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5"></div>
                   </div>
-                </CardContent>
-              </Card>
+
+                  <CardContent className="relative z-10 p-0">
+                    <h3 className="text-3xl font-bold text-white mb-6 flex items-center justify-center lg:justify-start gap-3">
+                      <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
+                      My Journey & Expertise
+                    </h3>
+                    <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-4">
+                      As a detail-oriented Data Science undergraduate at SLIIT, I bring a unique blend of analytical
+                      rigor and practical development skills. My academic journey has equipped me with a strong
+                      foundation in machine learning, statistical analysis, and data warehousing.
+                    </motion.p>
+                    <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg mb-6">
+                      Beyond theory, I have hands-on experience in full-stack web development, proficient in the MERN
+                      stack, Next.js, and building robust RESTful APIs. I'm also adept at integrating DevOps practices
+                      to streamline development workflows and ensure scalable, efficient solutions.
+                    </motion.p>
+                    <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed text-lg">
+                      My passion lies in contributing to innovative teams and advancing the fields of data science and
+                      software development, always striving to build solutions that make a tangible difference.
+                    </motion.p>
+                  </CardContent>
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/50 transition-all duration-300 pointer-events-none"></div>
+                </Card>
+              </motion.div>
+
+              {/* Education Card */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                custom={1}
+              >
+                <Card className="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border-blue-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
+                  <CardContent className="p-0">
+                    <div className="flex items-center mb-4">
+                      <GraduationCap className="w-10 h-10 text-blue-400 mr-3" />
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Education</h3>
+                        <p className="text-blue-300 text-sm">Academic Foundation</p>
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-1">BSc Information Technology</h4>
+                    <p className="text-blue-300 mb-2">SLIIT • Data Science Specialization</p>
+                    <div className="flex justify-between items-center text-gray-400 text-sm">
+                      <span>GPA: 3.19</span>
+                      <span>2022 - Present</span>
+                    </div>
+                    <div className="mt-4">
+                      <h5 className="font-semibold text-white mb-2">Key Areas:</h5>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          "MERN Stack",
+                          "Next.js",
+                          "Machine Learning",
+                          "RESTful APIs",
+                          "DevOps",
+                          "Data Warehousing",
+                        ].map((skill) => (
+                          <Badge key={skill} variant="secondary" className="bg-blue-800/30 text-blue-200">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Core Technical Stack Card */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                custom={2}
+              >
+                <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 shadow-xl transition-all duration-500 transform">
+                  <CardContent className="p-0">
+                    <div className="flex items-center mb-4">
+                      <Layers className="w-10 h-10 text-cyan-400 mr-3" />
+                      <div>
+                        <h3 className="text-xl font-bold text-white">Core Technical Stack</h3>
+                        <p className="text-cyan-300 text-sm">Languages, Frameworks & Libraries</p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <Monitor className="w-6 h-6 text-blue-400" />
+                        <div>
+                          <h4 className="font-semibold text-white mb-1">Frontend:</h4>
+                          <p className="text-gray-300 text-sm">React.js, Vue.js, Next.js, Tailwind CSS</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Server className="w-6 h-6 text-cyan-400" />
+                        <div>
+                          <h4 className="font-semibold text-white mb-1">Backend:</h4>
+                          <p className="text-gray-300 text-sm">Node.js, Express.js, RESTful APIs</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Database className="w-6 h-6 text-blue-400" />
+                        <div>
+                          <h4 className="font-semibold text-white mb-1">Databases:</h4>
+                          <p className="text-gray-300 text-sm">MongoDB, MySQL</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Smartphone className="w-6 h-6 text-cyan-400" />
+                        <div>
+                          <h4 className="font-semibold text-white mb-1">Mobile:</h4>
+                          <p className="text-gray-300 text-sm">Kotlin</p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Contact Info Card */}
+              <motion.div variants={itemVariants} whileHover="hover" custom={4} className="lg:col-span-3">
+                <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                  <CardContent className="p-0">
+                    <h3 className="text-2xl font-bold text-white mb-6 text-center">Get In Touch</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {[
+                        { icon: Phone, label: "Phone", value: "+94 71 7989333", color: "blue" },
+                        { icon: Mail, label: "Email", value: "wimukthi316@gmail.com", color: "cyan" },
+                        { icon: MapPin, label: "Location", value: "Kaduwela, LK", color: "blue" },
+                      ].map(({ icon: Icon, label, value, color }) => (
+                        <div
+                          key={label}
+                          className="flex flex-col items-center text-center p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
+                        >
+                          <Icon className={`w-8 h-8 mb-2 text-${color}-400`} />
+                          <p className="text-sm text-gray-400 mb-1">{label}</p>
+                          <p className="text-base text-white font-semibold">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </motion.div>
           </div>
         </section>
