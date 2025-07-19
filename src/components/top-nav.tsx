@@ -55,6 +55,7 @@ export default function TopNav({ onNavigate }: TopNavProps) {
   // Effect for calculating and updating the line style based on active section
   useEffect(() => {
     const updateLineStyle = () => {
+      // Use requestAnimationFrame to ensure DOM is stable before measuring
       requestAnimationFrame(() => {
         const activeItem = itemRefs.current[activeSection]
         const parentOfButtons = document.querySelector(".flex.gap-8.flex-row.leading-7")
@@ -70,22 +71,29 @@ export default function TopNav({ onNavigate }: TopNavProps) {
             x: itemRect.left - parentRect.left + horizontalPadding,
           })
         }
-        // The else block is removed here.
+        // Removed the else block that caused the useEffect dependency warning.
+        // If activeItem or parentOfButtons are null, lineStyle will simply retain its last value.
       })
     }
 
+    // Update on activeSection change and on window resize
     updateLineStyle()
     window.addEventListener("resize", updateLineStyle)
 
     return () => {
       window.removeEventListener("resize", updateLineStyle)
     }
-  }, [activeSection])
+  }, [activeSection]) // activeSection is the only dependency needed here
 
   return (
     <nav
       className={`fixed top-4 left-1/2 -translate-x-1/2 h-auto w-fit bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-8 transition-transform duration-300 py-0 px-24`}
     >
+      {/* My Name Initials */}
+      <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 mr-4">
+        WG.dev
+      </div>
+
       <div className="relative flex flex-row items-center justify-center h-full">
         {" "}
         {/* This div now contains both the timeline and the nav items */}
@@ -94,13 +102,13 @@ export default function TopNav({ onNavigate }: TopNavProps) {
           {/* Made this relative */}
           {/* Active Timeline Line (horizontal) - NOW INSIDE THIS DIV */}
           <motion.div
-            className="absolute bottom-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full h-0.5"
+            className="absolute bottom-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full h-0.5 shadow-md shadow-blue-500/50"
             initial={false}
             animate={{
               width: lineStyle.width,
               x: lineStyle.x,
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: "spring", stiffness: 150, damping: 25 }}
           />
           {navItems.map((item) => {
             const isActive = activeSection === item.id

@@ -163,7 +163,7 @@ export default function HomePage() {
       tech: ["Kotlin", "UI Design", "Material Design"],
       image: "/SkillBoost.png",
       link: "https://github.com/Wimukthi316/Skill-Boost",
-      githubLink: "https://github.com/Wimukthi316/Skill-Boost",
+      githubLink: "https://github.com/Wimukthi316/SkillBoost",
       type: "Mobile Development",
       category: "mobile",
       gradient: "from-slate-600 to-blue-600",
@@ -592,7 +592,7 @@ export default function HomePage() {
                     className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[160px] sm:min-w-[180px] h-12 sm:h-14"
                   >
                     <Rocket className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                    Let's Collaborate
+                    Let{"&apos;"}s Collaborate
                   </Button>
                 </motion.div>
                 <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
@@ -614,7 +614,7 @@ export default function HomePage() {
                   { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
                   { icon: Linkedin, href: "https://www.linkedin.com/in/wimukthi-gunarathna/", label: "LinkedIn" },
                   { icon: Globe, href: "#", label: "Portfolio" },
-                ].map(({ icon: Icon, href, label }, index) => (
+                ].map(({ icon: Icon, href, label }, _) => (
                   <motion.div key={label} variants={socialIconVariants} whileHover="hover">
                     <Link
                       href={href}
@@ -717,8 +717,8 @@ export default function HomePage() {
                               with a strong interest in Data Engineering and DevOps. I have hands-on experience in
                               full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. I
                               enjoy building scalable, user-focused applications with clean UIs using React, Vite, and
-                              Tailwind CSS. I'm always eager to explore cloud technologies and automate processes to
-                              turn ideas into efficient, data-driven solutions.
+                              Tailwind CSS. I{"&apos;"}m always eager to explore cloud technologies and automate
+                              processes to turn ideas into efficient, data-driven solutions.
                             </p>
                           </div>
                           {/* Status badges */}
@@ -734,7 +734,7 @@ export default function HomePage() {
                                 color: "from-purple-500/20 to-purple-600/20 border-purple-400/30",
                               },
                               { label: "💻 Full-Stack", color: "from-cyan-500/20 to-cyan-600/20 border-cyan-400/30" },
-                            ].map((badge, index) => (
+                            ].map((badge) => (
                               <motion.div
                                 key={badge.label}
                                 className={`px-4 py-2 rounded-full bg-gradient-to-r ${badge.color} border backdrop-blur-sm text-sm font-medium text-white`}
@@ -1034,12 +1034,12 @@ export default function HomePage() {
               variants={containerVariants}
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 sm:gap-6"
             >
-              {skills.map((skill, index) => (
+              {skills.map((skill, _) => (
                 <motion.div
                   key={skill.name}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                  custom={index}
+                  custom={_}
                 >
                   <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
                     <CardContent className="p-4 sm:p-6 text-center">
@@ -1090,12 +1090,12 @@ export default function HomePage() {
               variants={containerVariants}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
-              {certifications.map((cert, index) => (
+              {certifications.map((cert, _) => (
                 <motion.div
-                  key={index}
+                  key={_}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                  custom={index}
+                  custom={_}
                 >
                   <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
                     <CardContent className="p-4 sm:p-6 text-center">
