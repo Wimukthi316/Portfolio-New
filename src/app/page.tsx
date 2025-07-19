@@ -110,7 +110,7 @@ export default function HomePage() {
     description: "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
     image: "/placeholder.svg?height=400&width=600",
-    link: "#",
+    link: "https://github.com/Wimukthi316/Pet-Care",
     type: "Full Stack Development",
     category: "web",
     gradient: "from-blue-600 to-blue-400",
@@ -501,8 +501,7 @@ export default function HomePage() {
                 variants={heroTextVariants}
                 className="text-sm sm:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed px-4"
               >
-                Crafting innovative digital experiences through the perfect blend of data science insights and
-                full-stack development expertise. Passionate about building scalable solutions that make a difference.
+                Crafting impactful digital solutions by blending data science, DevOps, and full-stack development. Passionate about building scalable, user-centric systems that deliver real-world value.
               </motion.p>
 
               <motion.div
@@ -536,7 +535,7 @@ export default function HomePage() {
               >
                 {[
                   { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
-                  { icon: Linkedin, href: "www.linkedin.com/in/wimukthi-gunarathna-40b452259", label: "LinkedIn" },
+                  { icon: Linkedin, href: "https://www.linkedin.com/in/wimukthi-gunarathna/", label: "LinkedIn" },
                   { icon: Globe, href: "#", label: "Portfolio" },
                 ].map(({ icon: Icon, href, label }, index) => (
                   <motion.div key={label} variants={socialIconVariants} whileHover="hover">
@@ -619,7 +618,7 @@ export default function HomePage() {
                             {/* Profile image container */}
                             <div className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 p-1 shadow-2xl">
                               <Image
-                                src="/placeholder.svg?height=192&width=192"
+                                src="/profile.png?height=192&width=192"
                                 alt="Wimukthi Gunarathna"
                                 width={192}
                                 height={192}
@@ -643,9 +642,9 @@ export default function HomePage() {
                               Data Science Student & Full-Stack Developer
                             </div>
                             <p className="text-lg text-gray-300 leading-relaxed max-w-5xl">
-                              I'm Wimukthi Gunarathna, a passionate Frontend Developer and undergraduate specializing in Data Science at SLIIT. With hands-on experience in modern web technologies like React, Vite, Tailwind CSS, and a strong foundation in HTML, CSS, and JavaScript, I design and build responsive, user-focused applications. I thrive on creating clean, accessible UI/UX designs and optimizing web performance across all devices.
-
-                              Over the past few years, I’ve developed academic and personal projects including management systems, mobile apps, and e-commerce websites—each enhancing my skills in frontend development, version control, and agile workflows. I’m always eager to explore new technologies and turn ideas into interactive digital experiences.     </p>
+                              I'm Wimukthi Gunarathna, a passionate Data Science undergraduate and developer with a strong interest in Data Engineering and DevOps. I have hands-on experience in full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. 
+                              
+                              I enjoy building scalable, user-focused applications with clean UIs using React, Vite, and Tailwind CSS. I'm always eager to explore cloud technologies and automate processes to turn ideas into efficient, data-driven solutions.     </p>
                           </div>
 
                           {/* Status badges */}
@@ -695,7 +694,7 @@ export default function HomePage() {
                       icon: Database,
                       title: "Data & Analytics",
                       description: "Database & warehousing",
-                      technologies: ["MongoDB", "MySQL", "Data Warehousing", "Analytics"],
+                      technologies: ["MongoDB", "MySQL", "Data Warehousing", "Power BI"],
                       gradient: "from-purple-500/10 to-pink-500/10",
                       borderGradient: "from-purple-400/30 to-pink-400/30",
                       iconGradient: "from-purple-500 to-pink-500"
@@ -704,7 +703,7 @@ export default function HomePage() {
                       icon: Brain,
                       title: "Data Science & AI",
                       description: "Machine learning focus",
-                      technologies: ["Python", "Machine Learning", "Statistical Analysis", "Kotlin"],
+                      technologies: ["Python", "Machine Learning", "Statistical Analysis", "R - Language"],
                       gradient: "from-orange-500/10 to-yellow-500/10",
                       borderGradient: "from-orange-400/30 to-yellow-400/30",
                       iconGradient: "from-orange-500 to-yellow-500"
@@ -1102,7 +1101,7 @@ export default function HomePage() {
           <div className="flex justify-center space-x-4 sm:space-x-6">
             {[
               { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
-              { icon: Linkedin, href: "www.linkedin.com/in/wimukthi-gunarathna-40b452259", label: "LinkedIn" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/wimukthi-gunarathna/", label: "LinkedIn" },
               { icon: Globe, href: "#", label: "Portfolio" },
             ].map(({ icon: Icon, href, label }) => (
               <Link
