@@ -94,13 +94,14 @@ export default function HomePage() {
 
   const projects = [
   {
-    title: "FEMMEFIT",
-    subtitle: "E-commerce Fashion Platform",
-    description: "A sophisticated women's clothing platform featuring advanced UX/UI design, responsive layouts, and seamless shopping experience. Built with modern React architecture and Tailwind CSS for optimal performance.",
-    tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI"],
-    image: "/placeholder.svg?height=400&width=600",
-    link: "#",
-    type: "Frontend Development",
+    title: "Spicelore",
+    subtitle: "Online Spice Shop",
+    description: "Spicelore is a modern online platform for purchasing a wide variety of spices. Featuring advanced UX/UI design, responsive layouts, and an intuitive shopping experience, Spicelore is built with React.js and styled using Tailwind CSS for optimal performance and accessibility. Users can easily explore, search, and purchase spices with a streamlined and visually appealing interface.",
+    tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI", "JavaScript"],
+    image: "/spicelore.png",
+    link: "https://github.com/Wimukthi316/Spicelore",
+    githubLink: "https://github.com/Wimukthi316/Spicelore",
+    type: "Full-Stack Development",
     category: "web",
     gradient: "from-blue-500 to-cyan-500",
   },
@@ -109,52 +110,69 @@ export default function HomePage() {
     subtitle: "Online Veterinary Platform",
     description: "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/petpaw.jpeg",
     link: "https://github.com/Wimukthi316/Pet-Care",
+    githubLink: "https://github.com/Wimukthi316/Pet-Care",
     type: "Full Stack Development",
     category: "web",
     gradient: "from-blue-600 to-blue-400",
   },
   {
-    title: "EduFlow",
+    title: "EduStream",
     subtitle: "Course Management System",
     description: "Modern educational platform built with Vue.js 3 and TypeScript. Features course booking, progress tracking, and interactive learning modules with state management via Pinia.",
     tech: ["Vue.js 3", "TypeScript", "Pinia", "Educational Tech"],
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/edustream.png",
     link: "#",
+    githubLink: "https://github.com/Wimukthi316/EduStream",
     type: "Frontend Development",
     category: "web",
     gradient: "from-indigo-500 to-blue-500",
   },
   {
-    title: "SmartCents",
-    subtitle: "Budget Planning Mobile App",
-    description: "Intelligent mobile application for budget management and expense tracking. Built with Kotlin, featuring AI-powered insights, goal setting, and financial analytics.",
-    tech: ["Kotlin", "Mobile Development", "AI Integration", "Analytics"],
-    image: "/placeholder.svg?height=400&width=600",
-    link: "#",
+    title: "Task-Track",
+    subtitle: "Modern Task Management & Productivity App",
+    description: "Stay organized, boost productivity, and never miss important tasks with TASK-Track. This mobile-first app features advanced task management, time tracking with lap statistics, smart reminders, secure user profiles, real-time analytics, and a beautiful Material Design UI—all optimized for efficient daily productivity.",
+    tech: ["Kotlin", "Mobile Development", "XML","Material Design"],
+    image: "/task-track.png",
+    link: "https://github.com/Wimukthi316/Task-Track",
+    githubLink: "https://github.com/Wimukthi316/Task-Track",
     type: "Mobile Development",
     category: "mobile",
     gradient: "from-sky-500 to-blue-500",
   },
   {
-    title: "FitTracker Pro",
-    subtitle: "Fitness & Health Monitoring",
-    description: "Comprehensive fitness tracking application with real-time health monitoring, workout planning, and social features. Integrates with wearable devices and provides detailed analytics.",
+    title: "Wise-Wallet",
+    subtitle: "Personal Finance App",
+    description: "A feature-rich mobile finance application to track expenses, manage budgets, and gain valuable financial insights. Designed for intuitive use and smart financial planning.",
     tech: ["Kotlin", "Firebase", "Health APIs", "Real-time Sync"],
-    image: "/placeholder.svg?height=400&width=600",
-    link: "#",
+    image: "/wise-wallet.png",
+    link: "https://github.com/Wimukthi316/Wise-Wallet",
+    githubLink: "https://github.com/Wimukthi316/Wise-Wallet",
     type: "Mobile Development",
     category: "mobile",
     gradient: "from-blue-700 to-cyan-600",
   },
   {
-    title: "TaskFlow Mobile",
-    subtitle: "Project Management App",
-    description: "Mobile-first project management solution with offline capabilities, team collaboration, and advanced task scheduling. Built for productivity on the go.",
-    tech: ["Kotlin", "SQLite", "Offline Sync", "Material Design"],
-    image: "/placeholder.svg?height=400&width=600",
-    link: "#",
+    title: "Skill-Boost Mobile",
+    subtitle: "Skill Enhancement Platform",
+    description: "A platform for tracking and accelerating personal skill development with smart recommendations, progress analytics, and interactive learning modules.",
+    tech: ["Kotlin", "UI Design", "Material Design"],
+    image: "/SkillBoost.png",
+    link: "https://github.com/Wimukthi316/Skill-Boost",
+    githubLink: "https://github.com/Wimukthi316/SkillBoost",
+    type: "Mobile Development",
+    category: "mobile",
+    gradient: "from-slate-600 to-blue-600",
+  },
+  {
+    title: "List-Mate",
+    subtitle: "Task Management App",
+    description: "List Mate is a multitasking mobile application with timer, update, and delete tasks, created using Room Database.",
+    tech: ["Kotlin", "Room Database", "MVVM Architecture", "Material Design"],
+    image: "/list-mate.png",
+    link: "https://github.com/Wimukthi316/List-Mate",
+    githubLink: "https://github.com/Wimukthi316/List-Mate",
     type: "Mobile Development",
     category: "mobile",
     gradient: "from-slate-600 to-blue-600",
@@ -914,6 +932,7 @@ export default function HomePage() {
                       <Button
                         size="lg"
                         className={`bg-gradient-to-r ${project.gradient} hover:scale-105 transition-all duration-300 px-4 sm:px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[140px] h-12 text-sm sm:text-base`}
+                        onClick={() => window.open(project.link, '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         View Project
@@ -922,6 +941,7 @@ export default function HomePage() {
                         size="lg"
                         variant="outline"
                         className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-4 sm:px-6 py-3 rounded-full font-semibold bg-transparent transition-all duration-300 hover:shadow-lg w-full sm:w-auto min-w-[140px] h-12 text-sm sm:text-base"
+                        onClick={() => window.open(project.githubLink, '_blank')}
                       >
                         <Github className="w-4 h-4 mr-2" />
                         Source Code
