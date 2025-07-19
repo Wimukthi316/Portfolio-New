@@ -12,7 +12,6 @@ export default function TopNav({ onNavigate }: TopNavProps) {
   const [activeSection, setActiveSection] = useState("home")
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const itemRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({}) // Ref to store individual nav item buttons
-
   const [lineStyle, setLineStyle] = useState({ width: 0, x: 0 })
 
   // Define nav items
@@ -56,7 +55,6 @@ export default function TopNav({ onNavigate }: TopNavProps) {
   // Effect for calculating and updating the line style based on active section
   useEffect(() => {
     const updateLineStyle = () => {
-      // Use requestAnimationFrame to ensure DOM is stable before measuring
       requestAnimationFrame(() => {
         const activeItem = itemRefs.current[activeSection]
         const parentOfButtons = document.querySelector(".flex.gap-8.flex-row.leading-7")
@@ -71,19 +69,11 @@ export default function TopNav({ onNavigate }: TopNavProps) {
             width: itemRect.width - 2 * horizontalPadding,
             x: itemRect.left - parentRect.left + horizontalPadding,
           })
-        } else {
-          // If for some reason activeItem or parentOfButtons is null,
-          // we don't want to reset the line to 0,0 if it was already visible.
-          // It will just stay at its last known position until a valid activeSection is found.
-          // Only reset to 0,0 if it's the very first render and no section is active yet.
-          if (activeSection === "home" && lineStyle.width === 0 && lineStyle.x === 0) {
-            setLineStyle({ width: 0, x: 0 })
-          }
         }
+        // The else block is removed here.
       })
     }
 
-    // Update on activeSection change and on window resize
     updateLineStyle()
     window.addEventListener("resize", updateLineStyle)
 
@@ -97,6 +87,7 @@ export default function TopNav({ onNavigate }: TopNavProps) {
       className={`fixed top-4 left-1/2 -translate-x-1/2 h-auto w-fit bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-8 transition-transform duration-300 py-0 px-24`}
     >
       <div className="relative flex flex-row items-center justify-center h-full">
+        {" "}
         {/* This div now contains both the timeline and the nav items */}
         <div className="relative flex gap-8 flex-row leading-7">
           {" "}

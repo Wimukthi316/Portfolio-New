@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -7,18 +8,13 @@ import {
   Github,
   Linkedin,
   Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
   Download,
   Sparkles,
   Rocket,
   Brain,
   Code2,
   Globe,
-  GraduationCap,
   MousePointer,
-  Layers,
   Home,
   User,
   Briefcase,
@@ -78,6 +74,7 @@ export default function HomePage() {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
+
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
@@ -93,112 +90,191 @@ export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<"web" | "mobile">("web")
 
   const projects = [
-  {
-    title: "Spicelore",
-    subtitle: "Online Spice Shop",
-    description: "Spicelore is a modern online platform for purchasing a wide variety of spices. Featuring advanced UX/UI design, responsive layouts, and an intuitive shopping experience, Spicelore is built with React.js and styled using Tailwind CSS for optimal performance and accessibility. Users can easily explore, search, and purchase spices with a streamlined and visually appealing interface.",
-    tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI", "JavaScript"],
-    image: "/spicelore.png",
-    link: "https://github.com/Wimukthi316/Spicelore",
-    githubLink: "https://github.com/Wimukthi316/Spicelore",
-    type: "Full-Stack Development",
-    category: "web",
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "PetPaw",
-    subtitle: "Online Veterinary Platform",
-    description: "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
-    tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
-    image: "/petpaw.jpeg",
-    link: "https://github.com/Wimukthi316/Pet-Care",
-    githubLink: "https://github.com/Wimukthi316/Pet-Care",
-    type: "Full Stack Development",
-    category: "web",
-    gradient: "from-blue-600 to-blue-400",
-  },
-  {
-    title: "EduStream",
-    subtitle: "Course Management System",
-    description: "Modern educational platform built with Vue.js 3 and TypeScript. Features course booking, progress tracking, and interactive learning modules with state management via Pinia.",
-    tech: ["Vue.js 3", "TypeScript", "Pinia", "Educational Tech"],
-    image: "/edustream.png",
-    link: "#",
-    githubLink: "https://github.com/Wimukthi316/EduStream",
-    type: "Frontend Development",
-    category: "web",
-    gradient: "from-indigo-500 to-blue-500",
-  },
-  {
-    title: "Task-Track",
-    subtitle: "Modern Task Management & Productivity App",
-    description: "Stay organized, boost productivity, and never miss important tasks with TASK-Track. This mobile-first app features advanced task management, time tracking with lap statistics, smart reminders, secure user profiles, real-time analytics, and a beautiful Material Design UI—all optimized for efficient daily productivity.",
-    tech: ["Kotlin", "Mobile Development", "XML","Material Design"],
-    image: "/task-track.png",
-    link: "https://github.com/Wimukthi316/Task-Track",
-    githubLink: "https://github.com/Wimukthi316/Task-Track",
-    type: "Mobile Development",
-    category: "mobile",
-    gradient: "from-sky-500 to-blue-500",
-  },
-  {
-    title: "Wise-Wallet",
-    subtitle: "Personal Finance App",
-    description: "A feature-rich mobile finance application to track expenses, manage budgets, and gain valuable financial insights. Designed for intuitive use and smart financial planning.",
-    tech: ["Kotlin", "Firebase", "Health APIs", "Real-time Sync"],
-    image: "/wise-wallet.png",
-    link: "https://github.com/Wimukthi316/Wise-Wallet",
-    githubLink: "https://github.com/Wimukthi316/Wise-Wallet",
-    type: "Mobile Development",
-    category: "mobile",
-    gradient: "from-blue-700 to-cyan-600",
-  },
-  {
-    title: "Skill-Boost Mobile",
-    subtitle: "Skill Enhancement Platform",
-    description: "A platform for tracking and accelerating personal skill development with smart recommendations, progress analytics, and interactive learning modules.",
-    tech: ["Kotlin", "UI Design", "Material Design"],
-    image: "/SkillBoost.png",
-    link: "https://github.com/Wimukthi316/Skill-Boost",
-    githubLink: "https://github.com/Wimukthi316/SkillBoost",
-    type: "Mobile Development",
-    category: "mobile",
-    gradient: "from-slate-600 to-blue-600",
-  },
-  {
-    title: "List-Mate",
-    subtitle: "Task Management App",
-    description: "List Mate is a multitasking mobile application with timer, update, and delete tasks, created using Room Database.",
-    tech: ["Kotlin", "Room Database", "MVVM Architecture", "Material Design"],
-    image: "/list-mate.png",
-    link: "https://github.com/Wimukthi316/List-Mate",
-    githubLink: "https://github.com/Wimukthi316/List-Mate",
-    type: "Mobile Development",
-    category: "mobile",
-    gradient: "from-slate-600 to-blue-600",
-  },
-]
-
-  const filteredProjects = projects.filter((project) => project.category === activeCategory)
-
-  const skills = [
-    { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg", category: "Programming", level: 90 },
-    { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg", category: "Programming", level: 85 },
-    { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg", category: "Frontend", level: 92 },
-    { name: "Vue.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg", category: "Frontend", level: 88 },
-    { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg", category: "Backend", level: 87 },
-    { name: "Express.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg", category: "Backend", level: 85 },
-    { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg", category: "Frontend", level: 90 },
-    { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg", category: "Database", level: 85 },
-    { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg", category: "Database", level: 90 },
-    { name: "Kotlin", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg", category: "Mobile", level: 82 },
-    { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg", category: "Data Science", level: 88 },
-    { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg", category: "Frontend", level: 85 },
-    { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", category: "Cloud", level: 80 },
-    { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg", category: "Tools", level: 95 },
-    { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg", category: "Design", level: 85 },
+    {
+      title: "Spicelore",
+      subtitle: "Online Spice Shop",
+      description:
+        "Spicelore is a modern online platform for purchasing a wide variety of spices. Featuring advanced UX/UI design, responsive layouts, and an intuitive shopping experience, Spicelore is built with React.js and styled using Tailwind CSS for optimal performance and accessibility. Users can easily explore, search, and purchase spices with a streamlined and visually appealing interface.",
+      tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI", "JavaScript"],
+      image: "/spicelore.png",
+      link: "https://github.com/Wimukthi316/Spicelore",
+      githubLink: "https://github.com/Wimukthi316/Spicelore",
+      type: "Full-Stack Development",
+      category: "web",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "PetPaw",
+      subtitle: "Online Veterinary Platform",
+      description:
+        "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
+      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
+      image: "/petpaw.jpeg",
+      link: "https://github.com/Wimukthi316/Pet-Care",
+      githubLink: "https://github.com/Wimukthi316/Pet-Care",
+      type: "Full Stack Development",
+      category: "web",
+      gradient: "from-blue-600 to-blue-400",
+    },
+    {
+      title: "EduStream",
+      subtitle: "Course Management System",
+      description:
+        "Modern educational platform built with Vue.js 3 and TypeScript. Features course booking, progress tracking, and interactive learning modules with state management via Pinia.",
+      tech: ["Vue.js 3", "TypeScript", "Pinia", "Educational Tech"],
+      image: "/edustream.png",
+      link: "#",
+      githubLink: "https://github.com/Wimukthi316/EduStream",
+      type: "Frontend Development",
+      category: "web",
+      gradient: "from-indigo-500 to-blue-500",
+    },
+    {
+      title: "Task-Track",
+      subtitle: "Modern Task Management & Productivity App",
+      description:
+        "Stay organized, boost productivity, and never miss important tasks with TASK-Track. This mobile-first app features advanced task management, time tracking with lap statistics, smart reminders, secure user profiles, real-time analytics, and a beautiful Material Design UI—all optimized for efficient daily productivity.",
+      tech: ["Kotlin", "Mobile Development", "XML", "Material Design"],
+      image: "/task-track.png",
+      link: "https://github.com/Wimukthi316/Task-Track",
+      githubLink: "https://github.com/Wimukthi316/Task-Track",
+      type: "Mobile Development",
+      category: "mobile",
+      gradient: "from-sky-500 to-blue-500",
+    },
+    {
+      title: "Wise-Wallet",
+      subtitle: "Personal Finance App",
+      description:
+        "A feature-rich mobile finance application to track expenses, manage budgets, and gain valuable financial insights. Designed for intuitive use and smart financial planning.",
+      tech: ["Kotlin", "Firebase", "Health APIs", "Real-time Sync"],
+      image: "/wise-wallet.png",
+      link: "https://github.com/Wimukthi316/Wise-Wallet",
+      githubLink: "https://github.com/Wimukthi316/Wise-Wallet",
+      type: "Mobile Development",
+      category: "mobile",
+      gradient: "from-blue-700 to-cyan-600",
+    },
+    {
+      title: "Skill-Boost Mobile",
+      subtitle: "Skill Enhancement Platform",
+      description:
+        "A platform for tracking and accelerating personal skill development with smart recommendations, progress analytics, and interactive learning modules.",
+      tech: ["Kotlin", "UI Design", "Material Design"],
+      image: "/SkillBoost.png",
+      link: "https://github.com/Wimukthi316/Skill-Boost",
+      githubLink: "https://github.com/Wimukthi316/Skill-Boost",
+      type: "Mobile Development",
+      category: "mobile",
+      gradient: "from-slate-600 to-blue-600",
+    },
+    {
+      title: "List-Mate",
+      subtitle: "Task Management App",
+      description:
+        "List Mate is a multitasking mobile application with timer, update, and delete tasks, created using Room Database.",
+      tech: ["Kotlin", "Room Database", "MVVM Architecture", "Material Design"],
+      image: "/list-mate.png",
+      link: "https://github.com/Wimukthi316/List-Mate",
+      githubLink: "https://github.com/Wimukthi316/List-Mate",
+      type: "Mobile Development",
+      category: "mobile",
+      gradient: "from-slate-600 to-blue-600",
+    },
   ]
-
+  const filteredProjects = projects.filter((project) => project.category === activeCategory)
+  const skills = [
+    {
+      name: "JavaScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+      category: "Programming",
+      level: 90,
+    },
+    {
+      name: "TypeScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+      category: "Programming",
+      level: 85,
+    },
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+      category: "Frontend",
+      level: 92,
+    },
+    {
+      name: "Vue.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
+      category: "Frontend",
+      level: 88,
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+      category: "Backend",
+      level: 87,
+    },
+    {
+      name: "Express.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+      category: "Backend",
+      level: 85,
+    },
+    {
+      name: "Tailwind CSS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+      category: "Frontend",
+      level: 90,
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+      category: "Database",
+      level: 85,
+    },
+    {
+      name: "MySQL",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+      category: "Database",
+      level: 90,
+    },
+    {
+      name: "Kotlin",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
+      category: "Mobile",
+      level: 82,
+    },
+    {
+      name: "Python",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+      category: "Data Science",
+      level: 88,
+    },
+    {
+      name: "Next.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+      category: "Frontend",
+      level: 85,
+    },
+    {
+      name: "AWS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+      category: "Cloud",
+      level: 80,
+    },
+    {
+      name: "Git",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+      category: "Tools",
+      level: 95,
+    },
+    {
+      name: "Figma",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+      category: "Design",
+      level: 85,
+    },
+  ]
   const certifications = [
     {
       title: "Oracle MySQL HeatWave Implementation Associate",
@@ -229,7 +305,6 @@ export default function HomePage() {
       color: "from-sky-500 to-cyan-500",
     },
   ]
-
   // Framer Motion Variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -240,7 +315,6 @@ export default function HomePage() {
       },
     },
   }
-
   const itemVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.95 },
     visible: {
@@ -254,7 +328,6 @@ export default function HomePage() {
       },
     },
   }
-
   const heroTextVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -268,7 +341,6 @@ export default function HomePage() {
       },
     },
   }
-
   const heroTitleVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -282,7 +354,6 @@ export default function HomePage() {
       },
     },
   }
-
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -307,7 +378,6 @@ export default function HomePage() {
       scale: 0.95,
     },
   }
-
   const socialIconVariants = {
     hidden: { opacity: 0, scale: 0 },
     visible: {
@@ -330,7 +400,6 @@ export default function HomePage() {
       },
     },
   }
-
   // Mobile nav items with icons
   const mobileNavItems = [
     { id: "home", icon: Home, label: "Home" },
@@ -339,7 +408,6 @@ export default function HomePage() {
     { id: "skills", icon: Code, label: "Skills" },
     { id: "contact", icon: Mail, label: "Contact" },
   ]
-
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
       {/* Animated Background */}
@@ -382,7 +450,6 @@ export default function HomePage() {
           ></div>
         ))}
       </div>
-
       {/* Mobile Navigation */}
       <nav className="fixed top-3 left-1/2 -translate-x-1/2 h-12 w-[calc(100%-1.5rem)] max-w-sm px-4 bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] flex md:hidden items-center justify-between transition-transform duration-300">
         <div className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
@@ -396,7 +463,6 @@ export default function HomePage() {
           <AnimatedHamburger isMenuOpen={isMenuOpen} />
         </button>
       </nav>
-
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <motion.div
@@ -467,10 +533,8 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
       )}
-
       {/* Desktop Top-Center Navigation */}
       <TopNav onNavigate={scrollToSection} />
-
       {/* Main Content Wrapper */}
       <div className="">
         {/* Hero Section */}
@@ -480,8 +544,6 @@ export default function HomePage() {
           ref={heroRef}
         >
           <div className="max-w-6xl mx-auto text-center relative z-20">
-
-
             {/* Animated Text */}
             <motion.div
               initial="hidden"
@@ -500,7 +562,6 @@ export default function HomePage() {
                   Gunarathna
                 </span>
               </motion.h1>
-
               <motion.div
                 variants={heroTextVariants}
                 className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 space-y-2"
@@ -514,14 +575,13 @@ export default function HomePage() {
                   <span>Full Stack Developer</span>
                 </div>
               </motion.div>
-
               <motion.p
                 variants={heroTextVariants}
                 className="text-sm sm:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed px-4"
               >
-                Crafting impactful digital solutions by blending data science, DevOps, and full-stack development. Passionate about building scalable, user-centric systems that deliver real-world value.
+                Crafting impactful digital solutions by blending data science, DevOps, and full-stack development.
+                Passionate about building scalable, user-centric systems that deliver real-world value.
               </motion.p>
-
               <motion.div
                 variants={containerVariants}
                 className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 lg:gap-6 pt-6 sm:pt-8 px-4"
@@ -546,7 +606,6 @@ export default function HomePage() {
                   </Button>
                 </motion.div>
               </motion.div>
-
               <motion.div
                 variants={containerVariants}
                 className="flex justify-center space-x-4 sm:space-x-6 pt-6 sm:pt-8"
@@ -569,7 +628,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -579,7 +637,6 @@ export default function HomePage() {
         >
           <MousePointer className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
         </motion.div>
-
         {/* About Section - Modern Glassmorphism Card Stack */}
         <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -594,7 +651,6 @@ export default function HomePage() {
               </p>
               <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto mt-4"></div>
             </div>
-
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -605,34 +661,35 @@ export default function HomePage() {
               {/* Floating Background Elements */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
-                <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-purple-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute bottom-40 right-10 w-28 h-28 bg-pink-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+                <div
+                  className="absolute top-40 right-20 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl animate-pulse"
+                  style={{ animationDelay: "1s" }}
+                ></div>
+                <div
+                  className="absolute bottom-20 left-1/4 w-40 h-40 bg-purple-500/10 rounded-full blur-xl animate-pulse"
+                  style={{ animationDelay: "2s" }}
+                ></div>
+                <div
+                  className="absolute bottom-40 right-10 w-28 h-28 bg-pink-500/10 rounded-full blur-xl animate-pulse"
+                  style={{ animationDelay: "3s" }}
+                ></div>
               </div>
-
               {/* Main Content Stack */}
               <div className="relative z-10 space-y-6 sm:space-y-8">
                 {/* Header Card with Profile */}
-                <motion.div
-                  variants={itemVariants}
-                >
+                <motion.div variants={itemVariants}>
                   <Card className="relative overflow-hidden bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl">
                     {/* Glassmorphism overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5"></div>
-
                     {/* Animated border gradient */}
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 opacity-0 blur-xl"></div>
-
                     <CardContent className="relative z-10 p-0">
                       <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
                         {/* Floating Profile Image */}
-                        <motion.div
-                          className="relative flex-shrink-0"
-                        >
+                        <motion.div className="relative flex-shrink-0">
                           <div className="relative">
                             {/* Glowing background */}
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur-2xl opacity-20 scale-110 animate-pulse"></div>
-
                             {/* Profile image container */}
                             <div className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 p-1 shadow-2xl">
                               <Image
@@ -643,35 +700,40 @@ export default function HomePage() {
                                 className="rounded-full bg-black w-full h-full object-cover"
                               />
                             </div>
-
                             <div className="absolute -top-2 -right-2 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center animate-bounce z-40">
                               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                            </div> </div>                       </motion.div>
-
+                            </div>{" "}
+                          </div>
+                        </motion.div>
                         {/* Main Info */}
                         <div className="text-center lg:text-left space-y-6 flex-1">
                           <div>
-                            <motion.h3
-                              className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight"
-                            >
-
-                            </motion.h3>
+                            <motion.h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight"></motion.h3>
                             <div className="text-xl sm:text-2xl text-blue-300 mb-4 font-medium">
                               Data Science Undergraduate | Full-Stack & DevOps Enthusiast
                             </div>
                             <p className="text-lg text-gray-300 leading-relaxed max-w-5xl">
-                              I'm Wimukthi Gunarathna, a passionate Data Science undergraduate and developer with a strong interest in Data Engineering and DevOps. I have hands-on experience in full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. 
-                              
-                              I enjoy building scalable, user-focused applications with clean UIs using React, Vite, and Tailwind CSS. I'm always eager to explore cloud technologies and automate processes to turn ideas into efficient, data-driven solutions.     </p>
+                              I{"&apos;"}m Wimukthi Gunarathna, a passionate Data Science undergraduate and developer
+                              with a strong interest in Data Engineering and DevOps. I have hands-on experience in
+                              full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. I
+                              enjoy building scalable, user-focused applications with clean UIs using React, Vite, and
+                              Tailwind CSS. I'm always eager to explore cloud technologies and automate processes to
+                              turn ideas into efficient, data-driven solutions.
+                            </p>
                           </div>
-
                           {/* Status badges */}
                           <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
                             {[
-                              { label: "🎓 SLIIT Student", color: "from-blue-500/20 to-blue-600/20 border-blue-400/30" },
+                              {
+                                label: "🎓 SLIIT Student",
+                                color: "from-blue-500/20 to-blue-600/20 border-blue-400/30",
+                              },
                               { label: "📊 GPA: 3.19", color: "from-green-500/20 to-green-600/20 border-green-400/30" },
-                              { label: "🔬 Data Science", color: "from-purple-500/20 to-purple-600/20 border-purple-400/30" },
-                              { label: "💻 Full-Stack", color: "from-cyan-500/20 to-cyan-600/20 border-cyan-400/30" }
+                              {
+                                label: "🔬 Data Science",
+                                color: "from-purple-500/20 to-purple-600/20 border-purple-400/30",
+                              },
+                              { label: "💻 Full-Stack", color: "from-cyan-500/20 to-cyan-600/20 border-cyan-400/30" },
                             ].map((badge, index) => (
                               <motion.div
                                 key={badge.label}
@@ -686,7 +748,6 @@ export default function HomePage() {
                     </CardContent>
                   </Card>
                 </motion.div>
-
                 {/* Skills & Experience Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                   {[
@@ -697,7 +758,7 @@ export default function HomePage() {
                       technologies: ["React.js", "Vue.js", "Next.js", "Tailwind CSS"],
                       gradient: "from-blue-500/10 to-indigo-500/10",
                       borderGradient: "from-blue-400/30 to-indigo-400/30",
-                      iconGradient: "from-blue-500 to-indigo-500"
+                      iconGradient: "from-blue-500 to-indigo-500",
                     },
                     {
                       icon: Server,
@@ -706,7 +767,7 @@ export default function HomePage() {
                       technologies: ["Node.js", "Express.js", "RESTful APIs", "DevOps"],
                       gradient: "from-green-500/10 to-emerald-500/10",
                       borderGradient: "from-green-400/30 to-emerald-400/30",
-                      iconGradient: "from-green-500 to-emerald-500"
+                      iconGradient: "from-green-500 to-emerald-500",
                     },
                     {
                       icon: Database,
@@ -715,7 +776,7 @@ export default function HomePage() {
                       technologies: ["MongoDB", "MySQL", "Data Warehousing", "Power BI"],
                       gradient: "from-purple-500/10 to-pink-500/10",
                       borderGradient: "from-purple-400/30 to-pink-400/30",
-                      iconGradient: "from-purple-500 to-pink-500"
+                      iconGradient: "from-purple-500 to-pink-500",
                     },
                     {
                       icon: Brain,
@@ -724,8 +785,8 @@ export default function HomePage() {
                       technologies: ["Python", "Machine Learning", "Statistical Analysis", "R - Language"],
                       gradient: "from-orange-500/10 to-yellow-500/10",
                       borderGradient: "from-orange-400/30 to-yellow-400/30",
-                      iconGradient: "from-orange-500 to-yellow-500"
-                    }
+                      iconGradient: "from-orange-500 to-yellow-500",
+                    },
                   ].map((skill, index) => (
                     <motion.div
                       key={skill.title}
@@ -733,7 +794,9 @@ export default function HomePage() {
                       whileHover={{ y: -10, scale: 1.02, rotateX: 5, rotateY: index % 2 === 0 ? 5 : -5 }}
                       className="group h-full"
                     >
-                      <Card className={`h-full bg-gradient-to-br ${skill.gradient} backdrop-blur-2xl border border-gradient-to-r ${skill.borderGradient} rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer`}>
+                      <Card
+                        className={`h-full bg-gradient-to-br ${skill.gradient} backdrop-blur-2xl border border-gradient-to-r ${skill.borderGradient} rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer`}
+                      >
                         <CardContent className="p-0 text-center space-y-4 h-full flex flex-col">
                           {/* Icon */}
                           <motion.div
@@ -743,7 +806,6 @@ export default function HomePage() {
                           >
                             <skill.icon className="w-8 h-8 text-white" />
                           </motion.div>
-
                           {/* Content */}
                           <div className="flex-1">
                             <h4 className="text-lg font-bold text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
@@ -752,7 +814,6 @@ export default function HomePage() {
                             <p className="text-sm text-gray-400 mb-4 group-hover:text-gray-300 transition-colors duration-300">
                               {skill.description}
                             </p>
-
                             {/* Technologies */}
                             <div className="space-y-2">
                               {skill.technologies.map((tech) => (
@@ -775,8 +836,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
-
         {/* Selected Work Section */}
         <section id="work" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -786,15 +845,14 @@ export default function HomePage() {
                   Selected Work
                 </span>
               </h2>
-
-
               {/* Category Tabs */}
               <div className="flex justify-center mb-8 sm:mb-12">
                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1 inline-flex">
                   <button
                     onClick={() => setActiveCategory("web")}
-                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${activeCategory === "web" ? "text-white" : "text-gray-400 hover:text-white"
-                      }`}
+                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${
+                      activeCategory === "web" ? "text-white" : "text-gray-400 hover:text-white"
+                    }`}
                   >
                     {activeCategory === "web" && (
                       <motion.div
@@ -810,8 +868,9 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => setActiveCategory("mobile")}
-                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${activeCategory === "mobile" ? "text-white" : "text-gray-400 hover:text-white"
-                      }`}
+                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${
+                      activeCategory === "mobile" ? "text-white" : "text-gray-400 hover:text-white"
+                    }`}
                   >
                     {activeCategory === "mobile" && (
                       <motion.div
@@ -827,7 +886,6 @@ export default function HomePage() {
                   </button>
                 </div>
               </div>
-
               {/* Category Description */}
               <motion.div
                 key={activeCategory}
@@ -843,7 +901,6 @@ export default function HomePage() {
                 </p>
               </motion.div>
             </div>
-
             {/* Projects Grid */}
             <motion.div
               key={activeCategory}
@@ -858,8 +915,9 @@ export default function HomePage() {
                   initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 ${index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                    }`}
+                  className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 ${
+                    index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                  }`}
                 >
                   {/* Project Image */}
                   <div className="w-full lg:w-1/2">
@@ -888,7 +946,6 @@ export default function HomePage() {
                           style={{ transform: "translateZ(20px)" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
-
                         {/* Category Badge on Image */}
                         <div className="absolute top-4 left-4 z-10">
                           <Badge
@@ -900,7 +957,6 @@ export default function HomePage() {
                       </div>
                     </motion.div>
                   </div>
-
                   {/* Project Info */}
                   <div className="w-full lg:w-1/2 space-y-4 sm:space-y-6 px-4 lg:px-0">
                     <div>
@@ -933,7 +989,7 @@ export default function HomePage() {
                         size="lg"
                         variant="outline"
                         className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-4 sm:px-6 py-3 rounded-full font-semibold bg-transparent transition-all duration-300 hover:shadow-lg w-full sm:w-auto min-w-[140px] h-12 text-sm sm:text-base"
-                        onClick={() => window.open(project.githubLink, '_blank')}
+                        onClick={() => window.open(project.githubLink, "_blank")}
                       >
                         <Github className="w-4 h-4 mr-2" />
                         Source Code
@@ -943,7 +999,6 @@ export default function HomePage() {
                 </motion.div>
               ))}
             </motion.div>
-
             {/* Project Count Indicator */}
             <motion.div
               key={`count-${activeCategory}`}
@@ -959,7 +1014,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
         {/* Skills Section */}
         <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -973,7 +1027,6 @@ export default function HomePage() {
                 A comprehensive toolkit of modern technologies and frameworks that power my development journey.
               </p>
             </div>
-
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -1016,7 +1069,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
         {/* Certifications Section */}
         <section id="certifications" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -1031,7 +1083,6 @@ export default function HomePage() {
                 learning.
               </p>
             </div>
-
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -1050,7 +1101,7 @@ export default function HomePage() {
                     <CardContent className="p-4 sm:p-6 text-center">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
                         <Image
-                          src={cert.logo}
+                          src={cert.logo || "/placeholder.svg"}
                           alt={`${cert.issuer} logo`}
                           width={64}
                           height={64}
@@ -1069,7 +1120,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
         {/* Contact Section */}
         <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -1081,11 +1131,12 @@ export default function HomePage() {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8">
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Let's Create Something Amazing
+                Let{"&apos;"}s Create Something Amazing
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-              Ready to bring your next project to life? Let's collaborate and build something extraordinary together.
+              Ready to bring your next project to life? Let{"&apos;"}s collaborate and build something extraordinary
+              together.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">
               <Button
@@ -1095,12 +1146,10 @@ export default function HomePage() {
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Start a Conversation
               </Button>
-
             </div>
           </motion.div>
         </section>
       </div>
-
       {/* Footer */}
       <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
