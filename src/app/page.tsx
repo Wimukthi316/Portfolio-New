@@ -535,8 +535,8 @@ export default function HomePage() {
                 className="flex justify-center space-x-4 sm:space-x-6 pt-6 sm:pt-8"
               >
                 {[
-                  { icon: Github, href: "#", label: "GitHub" },
-                  { icon: Linkedin, href: "#", label: "LinkedIn" },
+                  { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
+                  { icon: Linkedin, href: "www.linkedin.com/in/wimukthi-gunarathna-40b452259", label: "LinkedIn" },
                   { icon: Globe, href: "#", label: "Portfolio" },
                 ].map(({ icon: Icon, href, label }, index) => (
                   <motion.div key={label} variants={socialIconVariants} whileHover="hover">
@@ -1101,8 +1101,8 @@ export default function HomePage() {
           </p>
           <div className="flex justify-center space-x-4 sm:space-x-6">
             {[
-              { icon: Github, href: "#", label: "GitHub" },
-              { icon: Linkedin, href: "#", label: "LinkedIn" },
+              { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
+              { icon: Linkedin, href: "www.linkedin.com/in/wimukthi-gunarathna-40b452259", label: "LinkedIn" },
               { icon: Globe, href: "#", label: "Portfolio" },
             ].map(({ icon: Icon, href, label }) => (
               <Link
