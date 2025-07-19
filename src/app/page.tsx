@@ -931,14 +931,6 @@ export default function HomePage() {
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                       <Button
                         size="lg"
-                        className={`bg-gradient-to-r ${project.gradient} hover:scale-105 transition-all duration-300 px-4 sm:px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[140px] h-12 text-sm sm:text-base`}
-                        onClick={() => window.open(project.link, '_blank')}
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        View Project
-                      </Button>
-                      <Button
-                        size="lg"
                         variant="outline"
                         className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-4 sm:px-6 py-3 rounded-full font-semibold bg-transparent transition-all duration-300 hover:shadow-lg w-full sm:w-auto min-w-[140px] h-12 text-sm sm:text-base"
                         onClick={() => window.open(project.githubLink, '_blank')}
