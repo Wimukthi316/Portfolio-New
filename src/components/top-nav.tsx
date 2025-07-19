@@ -11,11 +11,24 @@ interface TopNavProps {
 export default function TopNav({ onNavigate }: TopNavProps) {
   const [activeSection, setActiveSection] = useState("home")
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
+  const itemRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({}) // Ref to store individual nav item buttons
 
+  const [lineStyle, setLineStyle] = useState({ width: 0, x: 0 })
+
+  // Define nav items
+  const navItems = [
+    { id: "home", icon: Home, label: "Home" },
+    { id: "about", icon: User, label: "About" },
+    { id: "work", icon: Briefcase, label: "Work" },
+    { id: "skills", icon: Code, label: "Skills" },
+    { id: "contact", icon: Mail, label: "Contact" },
+  ]
+
+  // Effect for observing sections and setting activeSection
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "-30% 0px -30% 0px", // Adjust to trigger when section is roughly in the middle of the viewport
+      rootMargin: "-30% 0px -30% 0px",
       threshold: 0,
     }
 
@@ -29,7 +42,6 @@ export default function TopNav({ onNavigate }: TopNavProps) {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions)
 
-    // Observe all sections with an ID
     const sections = document.querySelectorAll("section[id]")
     sections.forEach((section) => {
       observer.observe(section)
@@ -41,59 +53,77 @@ export default function TopNav({ onNavigate }: TopNavProps) {
     }
   }, [])
 
-  const navItems = [
-    { id: "home", icon: Home, label: "Home" },
-    { id: "about", icon: User, label: "About" },
-    { id: "work", icon: Briefcase, label: "Work" },
-    { id: "skills", icon: Code, label: "Skills" },
-    { id: "contact", icon: Mail, label: "Contact" },
-  ]
+  // Effect for calculating and updating the line style based on active section
+  useEffect(() => {
+    const updateLineStyle = () => {
+      // Use requestAnimationFrame to ensure DOM is stable before measuring
+      requestAnimationFrame(() => {
+        const activeItem = itemRefs.current[activeSection]
+        const parentOfButtons = document.querySelector(".flex.gap-8.flex-row.leading-7")
 
-  // Calculate the position and width of the active timeline segment for horizontal layout
-  // itemWidth = icon container width (w-8 = 32px) + gap (gap-12 = 48px) = 80px
-  const itemWidth = 80
-  const activeIndex = navItems.findIndex((item) => item.id === activeSection)
-  const activeLineWidth = activeIndex >= 0 ? activeIndex * itemWidth + itemWidth / 2 : 0
-  const activeLineX = activeIndex >= 0 ? activeIndex * itemWidth : 0
+        if (activeItem && parentOfButtons) {
+          const itemRect = activeItem.getBoundingClientRect()
+          const parentRect = parentOfButtons.getBoundingClientRect()
+
+          const horizontalPadding = 24 // from px-6
+
+          setLineStyle({
+            width: itemRect.width - 2 * horizontalPadding,
+            x: itemRect.left - parentRect.left + horizontalPadding,
+          })
+        } else {
+          // If for some reason activeItem or parentOfButtons is null,
+          // we don't want to reset the line to 0,0 if it was already visible.
+          // It will just stay at its last known position until a valid activeSection is found.
+          // Only reset to 0,0 if it's the very first render and no section is active yet.
+          if (activeSection === "home" && lineStyle.width === 0 && lineStyle.x === 0) {
+            setLineStyle({ width: 0, x: 0 })
+          }
+        }
+      })
+    }
+
+    // Update on activeSection change and on window resize
+    updateLineStyle()
+    window.addEventListener("resize", updateLineStyle)
+
+    return () => {
+      window.removeEventListener("resize", updateLineStyle)
+    }
+  }, [activeSection])
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 -translate-x-1/2 h-10 w-fit px-8 bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-12 transition-transform duration-300 my-0 py-5`}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 h-auto w-fit bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-8 transition-transform duration-300 py-0 px-24`}
     >
-      {/* My Name Initials */}
-      <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 mr-4">
-        WG.dev
-      </div>
       <div className="relative flex flex-row items-center justify-center h-full">
-        {/* Active Timeline Line (horizontal) */}
-        
-
-        <div className="flex flex-row gap-12">
-          {navItems.map((item, index) => {
+        {/* This div now contains both the timeline and the nav items */}
+        <div className="relative flex gap-8 flex-row leading-7">
+          {" "}
+          {/* Made this relative */}
+          {/* Active Timeline Line (horizontal) - NOW INSIDE THIS DIV */}
+          <motion.div
+            className="absolute bottom-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full h-0.5"
+            initial={false}
+            animate={{
+              width: lineStyle.width,
+              x: lineStyle.x,
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
+          {navItems.map((item) => {
             const isActive = activeSection === item.id
             return (
               <motion.button
                 key={item.id}
+                ref={(el) => (itemRefs.current[item.id] = el)} // Assign ref to each button
                 onClick={() => onNavigate(item.id)}
-                className="relative flex flex-col items-center justify-center group focus:outline-none h-8 w-8" // Smaller fixed size for consistent orb
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className="relative flex flex-col items-center justify-center group focus:outline-none p-2 px-6" // Added padding for better spacing
+                whileHover={{ scale: 1.05 }} // Slightly reduced hover scale for stacked items
+                whileTap={{ scale: 0.95 }}
                 aria-current={isActive ? "page" : undefined}
               >
-                {/* Orb Effect */}
-                <motion.div
-                  className={`absolute inset-0 rounded-full transition-all duration-300`}
-                  initial={false}
-                  animate={{
-                    scale: isActive ? 1.8 : 1, // Scale the orb
-                    opacity: isActive ? 0.3 : 0, // Make it semi-transparent when active
-                    background: isActive ? "radial-gradient(circle, var(--tw-gradient-stops))" : "transparent",
-                    "--tw-gradient-from": isActive ? "rgba(59, 130, 246, 0.8)" : "", // blue-500 with opacity
-                    "--tw-gradient-to": isActive ? "rgba(6, 182, 212, 0.8)" : "", // cyan-500 with opacity
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                ></motion.div>
-
+                {/* Orb Effect - applied to the icon container */}
                 <motion.div
                   className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
                     isActive
@@ -108,7 +138,12 @@ export default function TopNav({ onNavigate }: TopNavProps) {
                     className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-white" : "text-gray-300 group-hover:text-white"}`}
                   />
                 </motion.div>
-                {/* Label span removed for icon-only navigation */}
+                {/* Label below icon */}
+                <span
+                  className={`text-xs font-medium mt-1 transition-colors duration-300 ${isActive ? "text-blue-300" : "text-gray-400 group-hover:text-white"}`}
+                >
+                  {item.label}
+                </span>
               </motion.button>
             )
           })}

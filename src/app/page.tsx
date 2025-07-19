@@ -90,52 +90,78 @@ export default function HomePage() {
     setIsMenuOpen(false)
   }
 
+  const [activeCategory, setActiveCategory] = useState<"web" | "mobile">("web")
+
   const projects = [
-    {
-      title: "FEMMEFIT",
-      subtitle: "E-commerce Fashion Platform",
-      description:
-        "A sophisticated women's clothing platform featuring advanced UX/UI design, responsive layouts, and seamless shopping experience. Built with modern React architecture and Tailwind CSS for optimal performance.",
-      tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI"],
-      image: "/placeholder.svg?height=400&width=600",
-      link: "#",
-      type: "Frontend Development",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "PetPaw",
-      subtitle: "Online Veterinary Platform",
-      description:
-        "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
-      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
-      image: "/placeholder.svg?height=400&width=600",
-      link: "#",
-      type: "Full Stack Development",
-      gradient: "from-emerald-500 to-teal-500",
-    },
-    {
-      title: "EduFlow",
-      subtitle: "Course Management System",
-      description:
-        "Modern educational platform built with Vue.js 3 and TypeScript. Features course booking, progress tracking, and interactive learning modules with state management via Pinia.",
-      tech: ["Vue.js 3", "TypeScript", "Pinia", "Educational Tech"],
-      image: "/placeholder.svg?height=400&width=600",
-      link: "#",
-      type: "Frontend Development",
-      gradient: "from-indigo-500 to-blue-500",
-    },
-    {
-      title: "SmartCents",
-      subtitle: "Budget Planning Mobile App",
-      description:
-        "Intelligent mobile application for budget management and expense tracking. Built with Kotlin, featuring AI-powered insights, goal setting, and financial analytics.",
-      tech: ["Kotlin", "Mobile Development", "AI Integration", "Analytics"],
-      image: "/placeholder.svg?height=400&width=600",
-      link: "#",
-      type: "Mobile Development",
-      gradient: "from-sky-500 to-blue-500",
-    },
-  ]
+  {
+    title: "FEMMEFIT",
+    subtitle: "E-commerce Fashion Platform",
+    description: "A sophisticated women's clothing platform featuring advanced UX/UI design, responsive layouts, and seamless shopping experience. Built with modern React architecture and Tailwind CSS for optimal performance.",
+    tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Frontend Development",
+    category: "web",
+    gradient: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "PetPaw",
+    subtitle: "Online Veterinary Platform",
+    description: "Comprehensive MERN stack application enabling pet owners to seamlessly book veterinary appointments. Features real-time scheduling, pet profiles, and integrated communication systems.",
+    tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Real-time"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Full Stack Development",
+    category: "web",
+    gradient: "from-blue-600 to-blue-400",
+  },
+  {
+    title: "EduFlow",
+    subtitle: "Course Management System",
+    description: "Modern educational platform built with Vue.js 3 and TypeScript. Features course booking, progress tracking, and interactive learning modules with state management via Pinia.",
+    tech: ["Vue.js 3", "TypeScript", "Pinia", "Educational Tech"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Frontend Development",
+    category: "web",
+    gradient: "from-indigo-500 to-blue-500",
+  },
+  {
+    title: "SmartCents",
+    subtitle: "Budget Planning Mobile App",
+    description: "Intelligent mobile application for budget management and expense tracking. Built with Kotlin, featuring AI-powered insights, goal setting, and financial analytics.",
+    tech: ["Kotlin", "Mobile Development", "AI Integration", "Analytics"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Mobile Development",
+    category: "mobile",
+    gradient: "from-sky-500 to-blue-500",
+  },
+  {
+    title: "FitTracker Pro",
+    subtitle: "Fitness & Health Monitoring",
+    description: "Comprehensive fitness tracking application with real-time health monitoring, workout planning, and social features. Integrates with wearable devices and provides detailed analytics.",
+    tech: ["Kotlin", "Firebase", "Health APIs", "Real-time Sync"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Mobile Development",
+    category: "mobile",
+    gradient: "from-blue-700 to-cyan-600",
+  },
+  {
+    title: "TaskFlow Mobile",
+    subtitle: "Project Management App",
+    description: "Mobile-first project management solution with offline capabilities, team collaboration, and advanced task scheduling. Built for productivity on the go.",
+    tech: ["Kotlin", "SQLite", "Offline Sync", "Material Design"],
+    image: "/placeholder.svg?height=400&width=600",
+    link: "#",
+    type: "Mobile Development",
+    category: "mobile",
+    gradient: "from-slate-600 to-blue-600",
+  },
+]
+
+  const filteredProjects = projects.filter((project) => project.category === activeCategory)
 
   const skills = [
     { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg", category: "Programming", level: 90 },
@@ -743,19 +769,77 @@ export default function HomePage() {
                   Selected Work
                 </span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4">
-                A showcase of my most impactful projects, demonstrating expertise across full-stack development, mobile
-                applications, and data-driven solutions.
-              </p>
+
+
+              {/* Category Tabs */}
+              <div className="flex justify-center mb-8 sm:mb-12">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1 inline-flex">
+                  <button
+                    onClick={() => setActiveCategory("web")}
+                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${activeCategory === "web" ? "text-white" : "text-gray-400 hover:text-white"
+                      }`}
+                  >
+                    {activeCategory === "web" && (
+                      <motion.div
+                        layoutId="activeCategory"
+                        className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Monitor className="w-4 h-4 sm:w-5 sm:h-5" />
+                      Web Applications
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => setActiveCategory("mobile")}
+                    className={`relative px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold rounded-full transition-all duration-300 ${activeCategory === "mobile" ? "text-white" : "text-gray-400 hover:text-white"
+                      }`}
+                  >
+                    {activeCategory === "mobile" && (
+                      <motion.div
+                        layoutId="activeCategory"
+                        className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
+                      Mobile Applications
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Category Description */}
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-center mb-8 sm:mb-12"
+              >
+                <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto px-4">
+                  {activeCategory === "web"
+                    ? "Explore my web development projects featuring modern frameworks, responsive designs, and full-stack solutions that deliver exceptional user experiences."
+                    : "Discover my mobile applications built with cutting-edge technologies, focusing on performance, user engagement, and seamless mobile experiences."}
+                </p>
+              </motion.div>
             </div>
 
-            <div className="space-y-12 sm:space-y-16 lg:space-y-24 xl:space-y-32">
-              {projects.map((project, index) => (
+            {/* Projects Grid */}
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, staggerChildren: 0.1 }}
+              className="space-y-12 sm:space-y-16 lg:space-y-24 xl:space-y-32"
+            >
+              {filteredProjects.map((project, index) => (
                 <motion.div
-                  key={index}
+                  key={`${activeCategory}-${index}`}
                   initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 ${index % 2 === 1 ? "lg:flex-row-reverse" : ""
                     }`}
@@ -787,6 +871,15 @@ export default function HomePage() {
                           style={{ transform: "translateZ(20px)" }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
+
+                        {/* Category Badge on Image */}
+                        <div className="absolute top-4 left-4 z-10">
+                          <Badge
+                            className={`bg-gradient-to-r ${project.gradient} text-white px-3 py-1 text-xs font-semibold`}
+                          >
+                            {activeCategory === "web" ? "Web App" : "Mobile App"}
+                          </Badge>
+                        </div>
                       </div>
                     </motion.div>
                   </div>
@@ -838,7 +931,21 @@ export default function HomePage() {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
+
+            {/* Project Count Indicator */}
+            <motion.div
+              key={`count-${activeCategory}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-center mt-12 sm:mt-16"
+            >
+              <p className="text-gray-400 text-sm sm:text-base">
+                Showing {filteredProjects.length} {activeCategory === "web" ? "web" : "mobile"}{" "}
+                {filteredProjects.length === 1 ? "project" : "projects"}
+              </p>
+            </motion.div>
           </div>
         </section>
 
