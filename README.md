@@ -165,12 +165,4 @@ Feel free to fork this project and make it your own! If you find any issues or h
 4. Push to the branch
 5. Open a Pull Request
 
----
-
-<div align="center">
-
-**Built with ❤️ by [Wimukthi Gunarathna](https://github.com/Wimukthi316)**
-
-⭐ Star this repo if you found it helpful!
-
 </div>
