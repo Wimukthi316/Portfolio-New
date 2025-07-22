@@ -163,7 +163,7 @@ export default function HomePage() {
       tech: ["Kotlin", "UI Design", "Material Design"],
       image: "/SkillBoost.png",
       link: "https://github.com/Wimukthi316/Skill-Boost",
-      githubLink: "https://github.com/Wimukthi316/SkillBoost",
+      githubLink: "https://github.com/Wimukthi316/Skill-Boost",
       type: "Mobile Development",
       category: "mobile",
       gradient: "from-slate-600 to-blue-600",
@@ -322,7 +322,6 @@ export default function HomePage() {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
         stiffness: 100,
         damping: 10,
       },
