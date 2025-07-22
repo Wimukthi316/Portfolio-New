@@ -89,10 +89,6 @@ export default function TopNav({ onNavigate }: TopNavProps) {
     <nav
       className={`fixed top-4 left-1/2 -translate-x-1/2 h-auto w-fit bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-8 transition-transform duration-300 py-0 px-24`}
     >
-      {/* My Name Initials */}
-      <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 mr-4">
-        WG.dev
-      </div>
 
       <div className="relative flex flex-row items-center justify-center h-full">
         {" "}
