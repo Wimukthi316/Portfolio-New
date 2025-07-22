@@ -1112,11 +1112,11 @@ export default function HomePage() {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8">
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Let{"&apos;"}s Create Something Amazing
+                Let's Create Something Amazing
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-              Ready to bring your next project to life? Let{"&apos;"}s collaborate and build something extraordinary
+              Ready to bring your next project to life? Let's collaborate and build something extraordinary
               together.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">
