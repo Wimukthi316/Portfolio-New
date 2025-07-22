@@ -1034,12 +1034,12 @@ export default function HomePage() {
               variants={containerVariants}
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4 sm:gap-6"
             >
-              {skills.map((skill, _) => (
+              {skills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                  custom={_}
+                  custom={index}
                 >
                   <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
                     <CardContent className="p-4 sm:p-6 text-center">
@@ -1090,12 +1090,12 @@ export default function HomePage() {
               variants={containerVariants}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
-              {certifications.map((cert, _) => (
+              {certifications.map((cert, index) => (
                 <motion.div
-                  key={_}
+                  key={index}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                  custom={_}
+                  custom={index}
                 >
                   <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
                     <CardContent className="p-4 sm:p-6 text-center">
@@ -1131,11 +1131,11 @@ export default function HomePage() {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8">
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Let{"&apos;"}s Create Something Amazing
+                Let's Create Something Amazing
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-              Ready to bring your next project to life? Let{"&apos;"}s collaborate and build something extraordinary
+              Ready to bring your next project to life? Let's collaborate and build something extraordinary
               together.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">
