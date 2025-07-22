@@ -96,7 +96,7 @@ export default function HomePage() {
       description:
         "Spicelore is a modern online platform for purchasing a wide variety of spices. Featuring advanced UX/UI design, responsive layouts, and an intuitive shopping experience, Spicelore is built with React.js and styled using Tailwind CSS for optimal performance and accessibility. Users can easily explore, search, and purchase spices with a streamlined and visually appealing interface.",
       tech: ["React.js", "Tailwind CSS", "Responsive Design", "UX/UI", "JavaScript"],
-      image: "/spicelore.png",
+      image: "/Sicelore.png",
       link: "https://github.com/Wimukthi316/Spicelore",
       githubLink: "https://github.com/Wimukthi316/Spicelore",
       type: "Full-Stack Development",
