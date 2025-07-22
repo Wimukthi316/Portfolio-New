@@ -334,7 +334,6 @@ export default function HomePage() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
         stiffness: 120,
         damping: 15,
         delay: 0.3,
@@ -347,7 +346,6 @@ export default function HomePage() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
         stiffness: 100,
         damping: 10,
         delay: 0.1,
@@ -360,7 +358,6 @@ export default function HomePage() {
       opacity: 1,
       scale: 1,
       transition: {
-        type: "spring",
         stiffness: 150,
         damping: 15,
         delay: 0.5,
@@ -369,7 +366,6 @@ export default function HomePage() {
     hover: {
       scale: 1.05,
       transition: {
-        type: "spring",
         stiffness: 300,
         damping: 10,
       },
@@ -384,7 +380,6 @@ export default function HomePage() {
       opacity: 1,
       scale: 1,
       transition: {
-        type: "spring",
         stiffness: 200,
         damping: 12,
         delay: 0.7,
@@ -394,7 +389,6 @@ export default function HomePage() {
       scale: 1.2,
       rotate: 10,
       transition: {
-        type: "spring",
         stiffness: 300,
         damping: 10,
       },
@@ -437,18 +431,22 @@ export default function HomePage() {
           style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
         ></motion.div>
         {/* Floating particles */}
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          ></div>
-        ))}
+        {[...Array(30).keys()].map(
+          (
+            i, // Changed to use Array.keys() to avoid unused '_'
+          ) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`,
+              }}
+            ></div>
+          ),
+        )}
       </div>
       {/* Mobile Navigation */}
       <nav className="fixed top-3 left-1/2 -translate-x-1/2 h-12 w-[calc(100%-1.5rem)] max-w-sm px-4 bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] flex md:hidden items-center justify-between transition-transform duration-300">
@@ -516,7 +514,6 @@ export default function HomePage() {
                       y: 0,
                       opacity: 1,
                       transition: {
-                        type: "spring",
                         stiffness: 200,
                         damping: 20,
                       },
@@ -614,8 +611,10 @@ export default function HomePage() {
                   { icon: Github, href: "https://github.com/Wimukthi316", label: "GitHub" },
                   { icon: Linkedin, href: "https://www.linkedin.com/in/wimukthi-gunarathna/", label: "LinkedIn" },
                   { icon: Globe, href: "#", label: "Portfolio" },
-                ].map(({ icon: Icon, href, label }, _) => (
+                ].map(({ icon: Icon, href, label }) => (
                   <motion.div key={label} variants={socialIconVariants} whileHover="hover">
+                    {" "}
+                    {/* Changed key to label */}
                     <Link
                       href={href}
                       className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
@@ -789,44 +788,32 @@ export default function HomePage() {
                     },
                   ].map((skill, index) => (
                     <motion.div
-                      key={skill.title}
+                      key={index}
                       variants={itemVariants}
-                      whileHover={{ y: -10, scale: 1.02, rotateX: 5, rotateY: index % 2 === 0 ? 5 : -5 }}
-                      className="group h-full"
+                      whileHover={{ y: -10, scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                      custom={index}
                     >
-                      <Card
-                        className={`h-full bg-gradient-to-br ${skill.gradient} backdrop-blur-2xl border border-gradient-to-r ${skill.borderGradient} rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer`}
-                      >
-                        <CardContent className="p-0 text-center space-y-4 h-full flex flex-col">
-                          {/* Icon */}
-                          <motion.div
-                            className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${skill.iconGradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                            whileHover={{ rotate: 360 }}
-                            transition={{ duration: 0.6 }}
-                          >
-                            <skill.icon className="w-8 h-8 text-white" />
-                          </motion.div>
-                          {/* Content */}
-                          <div className="flex-1">
-                            <h4 className="text-lg font-bold text-white mb-2 group-hover:text-blue-200 transition-colors duration-300">
-                              {skill.title}
-                            </h4>
-                            <p className="text-sm text-gray-400 mb-4 group-hover:text-gray-300 transition-colors duration-300">
-                              {skill.description}
-                            </p>
-                            {/* Technologies */}
-                            <div className="space-y-2">
-                              {skill.technologies.map((tech) => (
-                                <motion.div
-                                  key={tech}
-                                  whileHover={{ scale: 1.05 }}
-                                  className="text-xs text-gray-300 bg-white/5 rounded-lg py-1.5 px-3 hover:bg-white/10 transition-all duration-200 border border-white/10"
-                                >
-                                  {tech}
-                                </motion.div>
-                              ))}
-                            </div>
+                      <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
+                        <CardContent className="p-4 sm:p-6 text-center">
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+                            <Image
+                              src={skill.logo || "/placeholder.svg"}
+                              alt={`${skill.name} logo`}
+                              width={80}
+                              height={80}
+                              className="w-full h-full object-contain"
+                            />
                           </div>
+                          <h3 className="text-white font-semibold mb-1 sm:mb-2 text-sm sm:text-base">{skill.name}</h3>
+                          <p className="text-xs text-gray-400 mb-2 sm:mb-3">{skill.category}</p>
+                          {/* Skill Level Bar */}
+                          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2 mb-1 sm:mb-2">
+                            <div
+                              className="bg-gradient-to-r from-blue-400 to-cyan-400 h-1.5 sm:h-2 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${skill.level}%` }}
+                            ></div>
+                          </div>
+                          <span className="text-xs text-blue-300">{skill.level}%</span>
                         </CardContent>
                       </Card>
                     </motion.div>
@@ -1036,7 +1023,7 @@ export default function HomePage() {
             >
               {skills.map((skill, index) => (
                 <motion.div
-                  key={skill.name}
+                  key={index}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
                   custom={index}
@@ -1131,11 +1118,11 @@ export default function HomePage() {
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8">
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Let's Create Something Amazing
+                Let{"&apos;"}s Create Something Amazing
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-              Ready to bring your next project to life? Let's collaborate and build something extraordinary
+              Ready to bring your next project to life? Let{"&apos;"}s collaborate and build something extraordinary
               together.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">

@@ -12,7 +12,6 @@ export default function TopNav({ onNavigate }: TopNavProps) {
   const [activeSection, setActiveSection] = useState("home")
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const itemRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({}) // Ref to store individual nav item buttons
-
   const [lineStyle, setLineStyle] = useState({ width: 0, x: 0 })
 
   // Define nav items
@@ -71,15 +70,9 @@ export default function TopNav({ onNavigate }: TopNavProps) {
             width: itemRect.width - 2 * horizontalPadding,
             x: itemRect.left - parentRect.left + horizontalPadding,
           })
-        } else {
-          // If for some reason activeItem or parentOfButtons is null,
-          // we don't want to reset the line to 0,0 if it was already visible.
-          // It will just stay at its last known position until a valid activeSection is found.
-          // Only reset to 0,0 if it's the very first render and no section is active yet.
-          if (activeSection === "home" && lineStyle.width === 0 && lineStyle.x === 0) {
-            setLineStyle({ width: 0, x: 0 })
-          }
         }
+        // Removed the else block that caused the useEffect dependency warning.
+        // If activeItem or parentOfButtons are null, lineStyle will simply retain its last value.
       })
     }
 
@@ -90,26 +83,32 @@ export default function TopNav({ onNavigate }: TopNavProps) {
     return () => {
       window.removeEventListener("resize", updateLineStyle)
     }
-  }, [activeSection])
+  }, [activeSection]) // activeSection is the only dependency needed here
 
   return (
     <nav
       className={`fixed top-4 left-1/2 -translate-x-1/2 h-auto w-fit bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg rounded-full z-[100] hidden md:flex flex-row items-center justify-center gap-8 transition-transform duration-300 py-0 px-24`}
     >
+      {/* My Name Initials */}
+      <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 mr-4">
+        WG.dev
+      </div>
+
       <div className="relative flex flex-row items-center justify-center h-full">
+        {" "}
         {/* This div now contains both the timeline and the nav items */}
         <div className="relative flex gap-8 flex-row leading-7">
           {" "}
           {/* Made this relative */}
           {/* Active Timeline Line (horizontal) - NOW INSIDE THIS DIV */}
           <motion.div
-            className="absolute bottom-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full h-0.5"
+            className="absolute bottom-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full h-0.5 shadow-md shadow-blue-500/50"
             initial={false}
             animate={{
               width: lineStyle.width,
               x: lineStyle.x,
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ stiffness: 150, damping: 25 }}
           />
           {navItems.map((item) => {
             const isActive = activeSection === item.id
@@ -132,7 +131,7 @@ export default function TopNav({ onNavigate }: TopNavProps) {
                   }`}
                   initial={false}
                   animate={{ scale: isActive ? 1.2 : 1 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  transition={{ stiffness: 300, damping: 20 }}
                 >
                   <item.icon
                     className={`w-5 h-5 transition-colors duration-300 ${isActive ? "text-white" : "text-gray-300 group-hover:text-white"}`}
