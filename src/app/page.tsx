@@ -748,75 +748,70 @@ export default function HomePage() {
                 </motion.div>
                 {/* Skills & Experience Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                  {[
-                    {
-                      icon: Monitor,
-                      title: "Frontend Development",
-                      description: "Modern React ecosystems",
-                      technologies: ["React.js", "Vue.js", "Next.js", "Tailwind CSS"],
-                      gradient: "from-blue-500/10 to-indigo-500/10",
-                      borderGradient: "from-blue-400/30 to-indigo-400/30",
-                      iconGradient: "from-blue-500 to-indigo-500",
-                    },
-                    {
-                      icon: Server,
-                      title: "Backend Development",
-                      description: "Server-side architecture",
-                      technologies: ["Node.js", "Express.js", "RESTful APIs", "DevOps"],
-                      gradient: "from-green-500/10 to-emerald-500/10",
-                      borderGradient: "from-green-400/30 to-emerald-400/30",
-                      iconGradient: "from-green-500 to-emerald-500",
-                    },
-                    {
-                      icon: Database,
-                      title: "Data & Analytics",
-                      description: "Database & warehousing",
-                      technologies: ["MongoDB", "MySQL", "Data Warehousing", "Power BI"],
-                      gradient: "from-purple-500/10 to-pink-500/10",
-                      borderGradient: "from-purple-400/30 to-pink-400/30",
-                      iconGradient: "from-purple-500 to-pink-500",
-                    },
-                    {
-                      icon: Brain,
-                      title: "Data Science & AI",
-                      description: "Machine learning focus",
-                      technologies: ["Python", "Machine Learning", "Statistical Analysis", "R - Language"],
-                      gradient: "from-orange-500/10 to-yellow-500/10",
-                      borderGradient: "from-orange-400/30 to-yellow-400/30",
-                      iconGradient: "from-orange-500 to-yellow-500",
-                    },
-                  ].map((skill, index) => (
-                    <motion.div
-                      key={index}
-                      variants={itemVariants}
-                      whileHover={{ y: -10, scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                      custom={index}
-                    >
-                      <Card className="bg-gradient-to-br from-gray-900/30 to-black/30 border-white/10 backdrop-blur-sm transition-all duration-500 group h-full">
-                        <CardContent className="p-4 sm:p-6 text-center">
-                          <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 mx-auto mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
-                            <Image
-                              src={skill.logo || "/placeholder.svg"}
-                              alt={`${skill.name} logo`}
-                              width={80}
-                              height={80}
-                              className="w-full h-full object-contain"
-                            />
-                          </div>
-                          <h3 className="text-white font-semibold mb-1 sm:mb-2 text-sm sm:text-base">{skill.name}</h3>
-                          <p className="text-xs text-gray-400 mb-2 sm:mb-3">{skill.category}</p>
-                          {/* Skill Level Bar */}
-                          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2 mb-1 sm:mb-2">
-                            <div
-                              className="bg-gradient-to-r from-blue-400 to-cyan-400 h-1.5 sm:h-2 rounded-full transition-all duration-1000 ease-out"
-                              style={{ width: `${skill.level}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-xs text-blue-300">{skill.level}%</span>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
+                  {[{
+                    icon: Monitor,
+                    title: "Frontend Development",
+                    description: "Modern React ecosystems",
+                    technologies: ["React.js", "Vue.js", "Next.js", "Tailwind CSS"],
+                    gradient: "from-blue-500/10 to-indigo-500/10",
+                    borderGradient: "from-blue-400/30 to-indigo-400/30",
+                    iconGradient: "from-blue-500 to-indigo-500",
+                  },
+                  {
+                    icon: Server,
+                    title: "Backend Development",
+                    description: "Server-side architecture",
+                    technologies: ["Node.js", "Express.js", "RESTful APIs", "DevOps"],
+                    gradient: "from-green-500/10 to-emerald-500/10",
+                    borderGradient: "from-green-400/30 to-emerald-400/30",
+                    iconGradient: "from-green-500 to-emerald-500",
+                  },
+                  {
+                    icon: Database,
+                    title: "Data & Analytics",
+                    description: "Database & warehousing",
+                    technologies: ["MongoDB", "MySQL", "Data Warehousing", "Power BI"],
+                    gradient: "from-purple-500/10 to-pink-500/10",
+                    borderGradient: "from-purple-400/30 to-pink-400/30",
+                    iconGradient: "from-purple-500 to-pink-500",
+                  },
+                  {
+                    icon: Brain,
+                    title: "Data Science & AI",
+                    description: "Machine learning focus",
+                    technologies: ["Python", "Machine Learning", "Statistical Analysis", "R - Language"],
+                    gradient: "from-orange-500/10 to-yellow-500/10",
+                    borderGradient: "from-orange-400/30 to-yellow-400/30",
+                    iconGradient: "from-orange-500 to-yellow-500",
+                  }]
+                  .map((skill, index) => {
+                    const IconComponent = skill.icon
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={itemVariants}
+                        whileHover={{ y: -10, scale: 1.02, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                        custom={index}
+                      >
+                        <Card className={`bg-gradient-to-br ${skill.gradient} border border-white/10 backdrop-blur-sm transition-all duration-500 group h-full hover:border-white/20`}>
+                          <CardContent className="p-4 sm:p-6 text-center">
+                            <div className={`w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 rounded-lg bg-gradient-to-r ${skill.iconGradient} p-3 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center`}>
+                              <IconComponent className="w-full h-full text-white" />
+                            </div>
+                            <h3 className="text-white font-bold mb-2 text-sm sm:text-base">{skill.title}</h3>
+                            <p className="text-xs sm:text-sm text-gray-300 mb-3">{skill.description}</p>
+                            <div className="flex flex-wrap gap-1 justify-center">
+                              {skill.technologies.map((tech) => (
+                                <span key={tech} className="text-xs bg-white/10 text-gray-200 px-2 py-1 rounded">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    )
+                  })}
                 </div>
               </div>
             </motion.div>

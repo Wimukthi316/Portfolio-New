@@ -115,7 +115,7 @@ export default function TopNav({ onNavigate }: TopNavProps) {
             return (
               <motion.button
                 key={item.id}
-                ref={(el) => (itemRefs.current[item.id] = el)} // Assign ref to each button
+                ref={(el) => { itemRefs.current[item.id] = el }} // Assign ref to each button
                 onClick={() => onNavigate(item.id)}
                 className="relative flex flex-col items-center justify-center group focus:outline-none p-2 px-6" // Added padding for better spacing
                 whileHover={{ scale: 1.05 }} // Slightly reduced hover scale for stacked items
