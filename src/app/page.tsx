@@ -588,7 +588,7 @@ export default function HomePage() {
                     className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[160px] sm:min-w-[180px] h-12 sm:h-14"
                   >
                     <Rocket className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                    Let{"&apos;"}s Collaborate
+                    Join the journey
                   </Button>
                 </motion.div>
                 <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
