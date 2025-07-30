@@ -711,7 +711,7 @@ export default function HomePage() {
                               Data Science Undergraduate | Full-Stack & DevOps Enthusiast
                             </div>
                             <p className="text-lg text-gray-300 leading-relaxed max-w-5xl">
-                              I'm Wimukthi Gunarathna, a passionate Data Science undergraduate and developer
+                              Wimukthi Gunarathna here, a passionate Data Science undergraduate and developer
                               with a strong interest in Data Engineering and DevOps. I have hands-on experience in
                               full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. I
                               enjoy building scalable, user-focused applications with clean UIs using React, Vite, and
