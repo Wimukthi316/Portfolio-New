@@ -711,11 +711,11 @@ export default function HomePage() {
                               Data Science Undergraduate | Full-Stack & DevOps Enthusiast
                             </div>
                             <p className="text-lg text-gray-300 leading-relaxed max-w-5xl">
-                              I{"&apos;"}m Wimukthi Gunarathna, a passionate Data Science undergraduate and developer
+                              I'm Wimukthi Gunarathna, a passionate Data Science undergraduate and developer
                               with a strong interest in Data Engineering and DevOps. I have hands-on experience in
                               full-stack development using MERN, Next.js, and DevOps tools like GitHub and CI/CD. I
                               enjoy building scalable, user-focused applications with clean UIs using React, Vite, and
-                              Tailwind CSS. I{"&apos;"}m always eager to explore cloud technologies and automate
+                              Tailwind CSS. Always eager to explore cloud technologies and automate
                               processes to turn ideas into efficient, data-driven solutions.
                             </p>
                           </div>
